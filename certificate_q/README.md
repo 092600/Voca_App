@@ -60,3 +60,4 @@
 
 ## 3. 회고
 
+- [2023 7 10 회고 보러가기](https://github.com/092600/Voca_App/blob/master/%ED%9A%8C%EA%B3%A0/2023_07_10_%ED%9A%8C%EA%B3%A0.md)
