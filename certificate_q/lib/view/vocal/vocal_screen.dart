@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../common/component/custom_app_bar.dart';
+
 import '../../common/const/default.dart';
 import 'component/vocal_select_card.dart';
 
@@ -24,7 +25,7 @@ class VocalScreen extends StatelessWidget {
                   return VocalSelectCard(
                     isTheme: false,
                     theme: key,
-                    languageType: languagies[key] as String,
+                    languageType: languagies[key]!,
                   );
                 },
               ).toList(),

@@ -1,11 +1,8 @@
 import 'package:certificate_q/common/component/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import '../../common/const/default.dart';
-import '../../common/providers/word_provider.dart';
-import 'component/exam_bank_card.dart';
 
 class CreateExcerciseScreen extends StatelessWidget {
   final numbers = List.generate(5, (index) => index + 1);
@@ -20,39 +17,39 @@ class CreateExcerciseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wordsProvider = Provider.of<WordsProvider>(context);
-    final jpVocal = wordsProvider.words["japaneseWords"]!;
-    final engVocal = wordsProvider.words["englishWords"]!;
+    // 서버에 저장된 데이터로 화면에 보여줄 예정
+    // final jpVocal = wordsProvider.words["japaneseWords"]!;
+    // final engVocal = wordsProvider.words["englishWords"]!;
 
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: CustomScrollView(
-        physics: const ClampingScrollPhysics(),
+      body: const CustomScrollView(
+        physics: ClampingScrollPhysics(),
         slivers: [
-          const CustomAppBar(
+          CustomAppBar(
             expandedHeight: kToolbarHeight + 55,
             appBarBody: CreateExcerciseAppBarBody(),
             title: "Download",
           ),
-          StudyDownloadBox(
-            index: 0,
-            theme: "Japanese Vocabulary",
-            widgets: jpVocal.keys.map((key) {
-              return ExamBankCard(
-                title: key,
-                questions: jpVocal[key]!,
-              );
-            }).toList(),
-          ),
-          StudyDownloadBox(
-            theme: "English Vocabulary",
-            widgets: engVocal.keys.map((key) {
-              return ExamBankCard(
-                title: key,
-                questions: engVocal[key]!,
-              );
-            }).toList(),
-          ),
+          // StudyDownloadBox(
+          //   index: 0,
+          //   theme: "Japanese Vocabulary",
+          //   widgets: jpVocal.keys.map((key) {
+          //     return ExamBankCard(
+          //       title: key,
+          //       questions: jpVocal[key]!,
+          //     );
+          //   }).toList(),
+          // ),
+          // StudyDownloadBox(
+          //   theme: "English Vocabulary",
+          //   widgets: engVocal.keys.map((key) {
+          //     return ExamBankCard(
+          //       title: key,
+          //       questions: engVocal[key]!,
+          //     );
+          //   }).toList(),
+          // ),
           // StudyDownloadBox(
           //   theme: "Past Exam",
           //   widgets: examSample.map((title) {
@@ -106,14 +103,14 @@ class StudyDownloadBox extends StatelessWidget {
               ),
             ),
           ),
-          renderHorizonLIne(context),
+          renderHorizonLine(context),
           ...widgets,
         ],
       ),
     );
   }
 
-  Container renderHorizonLIne(BuildContext context) {
+  Container renderHorizonLine(BuildContext context) {
     return Container(
       color: primaryColor,
       width: MediaQuery.of(context).size.width,

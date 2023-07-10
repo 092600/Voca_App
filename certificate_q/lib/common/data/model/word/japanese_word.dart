@@ -1,23 +1,27 @@
-import 'package:certificate_q/common/datas/models/word.dart';
+import 'package:certificate_q/common/data/model/word/word.dart';
 
 import 'language_type.dart';
 
 class JapaneseWord extends Word {
   @override
+  final String theme;
+
+  @override
   final String spelling;
+
   @override
   final String pronunciation;
+
   @override
   final List<String> meanings;
-
-  late LanguageType _type;
 
   JapaneseWord({
     required this.spelling,
     required this.pronunciation,
     required this.meanings,
+    required this.theme,
   });
 
   @override
-  LanguageType type = LanguageType.JP;
+  final LanguageType type = LanguageType.JP;
 }

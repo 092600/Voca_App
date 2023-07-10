@@ -1,18 +1,48 @@
 import 'dart:math';
 
-import 'package:certificate_q/common/datas/models/english_word.dart';
-import 'package:certificate_q/common/datas/models/word.dart';
+import 'package:certificate_q/common/data/model/english_word.dart';
+import 'package:certificate_q/common/data/model/word/word.dart';
+import 'package:certificate_q/common/data/sample_word.dart';
+import 'package:certificate_q/common/database/drift_database.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'models/japanese_word.dart';
+import 'model/word/japanese_word.dart';
+
+void insertSampleWordsIntoDB(LocalDatabase db) async {
+  for (var sampleJPWordFile in sampleJPWordFiles) {
+    String theme = sampleJPWordFile
+        .substring(sampleJPWordFile.lastIndexOf("/") + 1)
+        .split(".csv")[0];
+
+    List<JapaneseWord> jpWords =
+        await readJapaneseWordCSV(fileLocation: sampleJPWordFile, theme: theme);
+
+    for (Word jpWord in jpWords) {
+      db.createWords(jpWord.toWordCompanion(theme));
+    }
+  }
+
+  for (var sampleENGWordFile in sampleENGWordFiles) {
+    String theme = sampleENGWordFile
+        .substring(sampleENGWordFile.lastIndexOf("/") + 1)
+        .split(".csv")[0];
+
+    List<EnglishWord> engWords =
+        await readEnglishWordCSV(fileLocation: sampleENGWordFile, theme: theme);
+
+    for (Word engWord in engWords) {
+      db.createWords(engWord.toWordCompanion(theme));
+    }
+  }
+}
 
 Future<List<JapaneseWord>> readJapaneseWordCSV({
-  required String themeTitle,
+  required String fileLocation,
+  required String theme,
 }) async {
   // CSV 파일을 로드합니다.
-  String file =
-      await rootBundle.loadString('assets/csv/japanese_words/$themeTitle.csv');
+  String file = await rootBundle.loadString(fileLocation);
 
   List<List<dynamic>> words =
       const CsvToListConverter().convert(file, eol: "\n");
@@ -30,6 +60,7 @@ Future<List<JapaneseWord>> readJapaneseWordCSV({
       spelling: kanji,
       pronunciation: yomikata,
       meanings: meanings,
+      theme: theme,
     );
 
     japaneseWords.add(japaneseWord);
@@ -39,11 +70,11 @@ Future<List<JapaneseWord>> readJapaneseWordCSV({
 }
 
 Future<List<EnglishWord>> readEnglishWordCSV({
-  required String themeTitle,
+  required String fileLocation,
+  required String theme,
 }) async {
   // CSV 파일을 로드합니다.
-  String file =
-      await rootBundle.loadString('assets/csv/english_words/$themeTitle.csv');
+  String file = await rootBundle.loadString(fileLocation);
 
   List<List<dynamic>> words =
       const CsvToListConverter().convert(file, eol: "\n");
@@ -61,6 +92,7 @@ Future<List<EnglishWord>> readEnglishWordCSV({
       spelling: spelling,
       pronunciation: pronunciation,
       meanings: meanings,
+      theme: theme,
     );
 
     englishWords.add(englishWord);

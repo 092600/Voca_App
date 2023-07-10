@@ -6,14 +6,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../common/component/custom_app_bar.dart';
 import '../../../common/const/default.dart';
 import '../../../common/const/test_type.dart';
+import '../../../common/data/model/word/language_type.dart';
+import '../../../common/data/model/word/word.dart';
 
 class VocalTestTypeSelectScreen extends StatelessWidget {
   final String theme;
-  final String languageType;
+  final LanguageType languageType;
+  final List<Word> questions;
 
   const VocalTestTypeSelectScreen({
     required this.theme,
     required this.languageType,
+    required this.questions,
     super.key,
   });
 
@@ -21,8 +25,8 @@ class VocalTestTypeSelectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       MultipleChoiceChallengeScreen(
-        theme: theme,
         languageType: languageType,
+        questions: questions,
       ),
       const SpellingChallengeScreen(),
       const SpellingChallengeScreen(),

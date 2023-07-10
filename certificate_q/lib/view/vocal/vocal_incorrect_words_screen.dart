@@ -1,4 +1,4 @@
-import 'package:certificate_q/common/datas/models/word.dart';
+import 'package:certificate_q/common/data/model/word/word.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

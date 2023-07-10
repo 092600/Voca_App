@@ -1,22 +1,26 @@
-import 'package:certificate_q/common/datas/models/language_type.dart';
-import 'package:certificate_q/common/datas/models/word.dart';
+import 'package:certificate_q/common/data/model/word/language_type.dart';
+import 'package:certificate_q/common/data/model/word/word.dart';
 
 class EnglishWord extends Word {
   @override
+  final String theme;
+
+  @override
   final String spelling;
+
   @override
   final String pronunciation;
+
   @override
   final List<String> meanings;
-
-  late LanguageType _type;
 
   EnglishWord({
     required this.spelling,
     required this.pronunciation,
     required this.meanings,
+    required this.theme,
   });
 
   @override
-  LanguageType type = LanguageType.ENG;
+  final LanguageType type = LanguageType.ENG;
 }

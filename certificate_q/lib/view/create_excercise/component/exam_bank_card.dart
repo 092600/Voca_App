@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../common/const/default.dart';
-import '../../../common/datas/models/word.dart';
+import '../../../common/data/model/word/word.dart';
 
 class ExamBankCard extends StatelessWidget {
   final String title;

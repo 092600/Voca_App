@@ -3,12 +3,13 @@ import 'package:certificate_q/common/const/default.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../common/providers/word_provider.dart';
+import '../../../common/data/model/word/language_type.dart';
+import '../../../common/providers/local_database_provider.dart';
 import '../component/vocal_select_card.dart';
 
 class VocalThemeSelectScreen extends StatelessWidget {
   final String theme;
-  final String languageType;
+  final LanguageType languageType;
 
   VocalThemeSelectScreen({
     required this.theme,
@@ -20,8 +21,7 @@ class VocalThemeSelectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wordsProvider = Provider.of<WordsProvider>(context);
-    final themes = wordsProvider.words[languagies[theme]];
+    final localDatabaseProvider = Provider.of<LocalDatabaseProvider>(context);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -31,17 +31,29 @@ class VocalThemeSelectScreen extends StatelessWidget {
           CustomAppBar(
             title: theme,
           ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              themes!.keys
-                  .map(
-                    (theme) => VocalSelectCard(
-                      isTheme: true,
-                      theme: theme,
-                      languageType: languageType,
-                    ),
-                  )
-                  .toList(),
+          SliverToBoxAdapter(
+            child: FutureBuilder<Set<String>>(
+              future: localDatabaseProvider
+                  .findWordsThemeByLanguageType(languageType),
+              builder:
+                  (BuildContext context, AsyncSnapshot<Set<String>> snapshot) {
+                if (snapshot.hasData) {
+                  final Set<String> themes = snapshot.data!;
+
+                  return Column(
+                    children: themes
+                        .map(
+                          (theme) => VocalSelectCard(
+                            isTheme: true,
+                            theme: theme,
+                            languageType: languageType,
+                          ),
+                        )
+                        .toList(),
+                  );
+                }
+                return Container(); // Add a return statement here if needed
+              },
             ),
           ),
         ],

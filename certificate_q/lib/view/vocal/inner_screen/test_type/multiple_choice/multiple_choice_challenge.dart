@@ -3,23 +3,22 @@ import 'dart:math';
 import 'package:certificate_q/layout/home_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../common/component/custom_app_bar.dart';
 import '../../../../../common/const/default.dart';
-import '../../../../../common/datas/managing_datas.dart';
-import '../../../../../common/datas/models/word.dart';
-import '../../../../../common/providers/word_provider.dart';
+import '../../../../../common/data/managing_datas.dart';
+import '../../../../../common/data/model/word/language_type.dart';
+import '../../../../../common/data/model/word/word.dart';
 import '../../../vocal_incorrect_words_screen.dart';
 import 'component/test_choice_container.dart';
 
 class MultipleChoiceChallengeScreen extends StatefulWidget {
-  final theme;
-  final String languageType;
+  final LanguageType languageType;
+  final List<Word> questions;
 
   const MultipleChoiceChallengeScreen({
-    required this.theme,
     required this.languageType,
+    required this.questions,
     super.key,
   });
 
@@ -42,9 +41,7 @@ class _MultipleChoiceChallengeScreenState
 
   @override
   Widget build(BuildContext context) {
-    final wordsProvider = Provider.of<WordsProvider>(context);
-    final List<Word> questions =
-        wordsProvider.words[widget.languageType]![widget.theme]!;
+    final List<Word> questions = widget.questions;
 
     // 처음에 들어온 경우, words -> shuffle
     if (!isLoaded) {

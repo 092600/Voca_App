@@ -1,4 +1,7 @@
+import 'package:certificate_q/common/data/model/language/language_model.dart';
 import 'package:flutter/material.dart';
+
+import '../data/model/word/language_type.dart';
 
 // color
 Color? backgroundColor = Colors.grey[300];
@@ -10,6 +13,14 @@ Color iconColor = const Color(0xFFd4fbff);
 String appBarTitle = "CQ";
 
 final languagies = {
-  "Japanese Vocabulary": "japaneseWords",
-  "English Vocabulary": "englishWords"
+  "Japanese Vocabulary": LanguageType.JP,
+  "English Vocabulary": LanguageType.ENG
 };
+// LanguageType.JP
+
+const LANGUAGIES = "languagies";
+
+List<LanguageModel> defaultLanguageModels = [
+  LanguageModel(languageTitle: "Japanese", languageType: LanguageType.JP),
+  LanguageModel(languageTitle: "English", languageType: LanguageType.ENG),
+];
