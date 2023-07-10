@@ -12,7 +12,8 @@
 ### 2-1. 로그인
 
 - 로그인 페이지
-    <image src="">
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Login%20Page.gif">
 
 ### 2-2. 단어 공부 페이지
 
@@ -20,10 +21,14 @@
 
 
 - 일본어 선택 시, 단어 공부
-    <image src="">
+
+  ![](https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%9D%BC%EB%B3%B8%EC%96%B4%20%EB%8B%A8%EC%96%B4%20%EA%B3%B5%EB%B6%80.gif)
+
 
 - 영어 선택 시, 단어 공부
-    <image src="">
+
+  ![](https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/%EC%98%81%EC%96%B4%20%EB%8B%A8%EC%96%B4%20%EA%B3%B5%EB%B6%80.gif)
+    
 
 
 ### 2-3. 메인 페이지
@@ -31,7 +36,8 @@
 메인 페이지에서는 자신이 설정한 공부 목표에 금일 얼마나 도달하였는지를 확인할 수 있으며, 즐겨찾기에 추가한 단어들을 바로바로 확인하고 공부할 수 있도록 하는 기능을 제공하는 페이지입니다.
 
 - 메인 페이지
-    <image src="">
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Home%20Page.gif">
 
 
 ### 2-4. 다운로드 페이지
@@ -39,7 +45,8 @@
 단어 다운로드 페이지는 여러 유저 간 자신이 사용하는 단어들을 공유하는 기능을 제공할 수 있는 페이지입니다.
 
 - 다운로드 페이지
-    <image src="">
+
+   <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Download%20Page.gif">
 
 
 ### 2-5. 마이 페이지
@@ -47,4 +54,5 @@
 마이 페이지는 CSV 파일로 단어을 불러들이거나 사용 중인 단어를 CSV 파일 형태로 내보낼 수 있는 기능과 공부 목표 설정 기능을 제공하는 페이지 입니다.
 
 - 마이 페이지
-    <image src="">
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/My%20Page.gif">
