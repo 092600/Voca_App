@@ -32,7 +32,7 @@ class VocalIncorrectWordsScreen extends StatelessWidget {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          height: 80,
+                          height: 100,
                           child: Row(
                             children: [
                               Expanded(

@@ -13,6 +13,8 @@ class MyStudyHistoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> dates = ["일", "월", "화", "수", "목", "금", "토"];
+
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -75,7 +77,7 @@ class MyStudyHistoryWidget extends StatelessWidget {
                               height: 70,
                               child: Center(
                                 child: Text(
-                                  "월",
+                                  dates[day - 20],
                                   style: GoogleFonts.bebasNeue(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,

@@ -1,16 +1,50 @@
-# certificate_q
+# VOCA APP With FLUTTER
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## 1. 프로젝트 소개
 
-A few resources to get you started if this is your first Flutter project:
+일본어와 영어를 비롯한 단어 공부와 자격증 공부까지 모바일로 쉽게 할 수 있도록 하는 것을 목표로 한 애플리케이션
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 2. 기능 소개
+
+### 2-1. 로그인
+
+- 로그인 페이지
+    <image src="">
+
+### 2-2. 단어 공부 페이지
+
+단어 공부 페이지는 사용자가 등록한 단어들을 여러 방식으로 공부할 수 있도록 기능을 제공하며 현재는 **"사지선다"** 방식만 구현한 상태입니다.
+
+
+- 일본어 선택 시, 단어 공부
+    <image src="">
+
+- 영어 선택 시, 단어 공부
+    <image src="">
+
+
+### 2-3. 메인 페이지
+
+메인 페이지에서는 자신이 설정한 공부 목표에 금일 얼마나 도달하였는지를 확인할 수 있으며, 즐겨찾기에 추가한 단어들을 바로바로 확인하고 공부할 수 있도록 하는 기능을 제공하는 페이지입니다.
+
+- 메인 페이지
+    <image src="">
+
+
+### 2-4. 다운로드 페이지
+
+단어 다운로드 페이지는 여러 유저 간 자신이 사용하는 단어들을 공유하는 기능을 제공할 수 있는 페이지입니다.
+
+- 다운로드 페이지
+    <image src="">
+
+
+### 2-5. 마이 페이지
+
+마이 페이지는 CSV 파일로 단어을 불러들이거나 사용 중인 단어를 CSV 파일 형태로 내보낼 수 있는 기능과 공부 목표 설정 기능을 제공하는 페이지 입니다.
+
+- 마이 페이지
+    <image src="">
