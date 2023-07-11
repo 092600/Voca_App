@@ -28,7 +28,7 @@
 
 - 회원가입 페이지
 
-  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Login%20Page.gif">
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/SignUp%20Page.gif">
 
 
 
