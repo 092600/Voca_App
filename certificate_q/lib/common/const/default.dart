@@ -12,10 +12,7 @@ Color iconColor = const Color(0xFFd4fbff);
 
 String appBarTitle = "CQ";
 
-final languagies = {
-  "Japanese Vocabulary": LanguageType.JP,
-  "English Vocabulary": LanguageType.ENG
-};
+final languagies = {"Japanese": LanguageType.JP, "English": LanguageType.ENG};
 // LanguageType.JP
 
 const LANGUAGIES = "languagies";
