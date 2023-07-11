@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../view/login/login_screen.dart';
 import '../const/default.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -21,16 +22,63 @@ class CustomAppBar extends StatelessWidget {
     return SliverAppBar(
       expandedHeight: expandedHeight,
       pinned: true,
-      actions: const [
-        SizedBox(
+      actions: [
+        const SizedBox(
           width: 10,
         ),
-        Icon(
-          Icons.more_horiz,
-          size: 30,
-          color: Colors.white,
+        InkWell(
+          onTap: () {
+            showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(25.0),
+                  ),
+                ),
+                builder: (context) {
+                  return SizedBox(
+                    height: 200,
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 25),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            SettingBottomSheetButton(
+                              content: "로그아웃",
+                              onTap: () {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()),
+                                  (route) => route == "/home",
+                                );
+                              },
+                            ),
+                            SettingBottomSheetButton(
+                              content: "고객지원",
+                              onTap: () {
+                                print("고객지원");
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                });
+
+            print("Tapped");
+          },
+          child: const Icon(
+            Icons.more_horiz,
+            size: 30,
+            color: Colors.white,
+          ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
       ],
@@ -44,6 +92,46 @@ class CustomAppBar extends StatelessWidget {
         ),
       ),
       flexibleSpace: appBarBody,
+    );
+  }
+}
+
+class SettingBottomSheetButton extends StatelessWidget {
+  const SettingBottomSheetButton({
+    required this.content,
+    required this.onTap,
+    super.key,
+  });
+
+  final String content;
+  final Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          height: 55,
+          child: Center(
+            child: Text(
+              content,
+              style: GoogleFonts.bebasNeue(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

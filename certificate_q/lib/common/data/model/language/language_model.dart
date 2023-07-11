@@ -4,8 +4,9 @@ import 'package:drift/drift.dart';
 
 class LanguageModel {
   // final int id;
-  final LanguageType languageType;
+
   final String languageTitle;
+  final LanguageType languageType;
   // final DateTime createAt;
 
   LanguageModel({

@@ -1,3 +1,4 @@
+import 'package:certificate_q/common/const/default.dart';
 import 'package:certificate_q/view/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -20,14 +21,14 @@ void main() async {
   const storage = FlutterSecureStorage();
   final db = LocalDatabase();
 
+  // db.delWords();
+
   List<Word> words = await db.findAllWords();
 
   // 샘플 데이터 추가하기
   if (words.isEmpty) {
     insertSampleWordsIntoDB(db);
-    // List<String> languagies = ["JP", "ENG"];
-    // final languagiesJson = json.encode(languagies);
-    // storage.write(key: LANGUAGIES, value: languagiesJson);
+    db.createLanguagies(defaultLanguageModels);
   }
 
   // List<Word> themeWords = await db.findWordByTheme(theme: "N3_사람사귀기, 관계 유지하기");

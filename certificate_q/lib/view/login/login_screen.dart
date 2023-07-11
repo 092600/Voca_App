@@ -1,5 +1,6 @@
 import 'package:certificate_q/common/const/default.dart';
 import 'package:certificate_q/layout/home_layout.dart';
+import 'package:certificate_q/view/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -124,21 +125,29 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Not a Member ? ",
                         style: TextStyle(
                           fontSize: 15,
                         ),
                       ),
-                      Text(
-                        "Register Now",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                      InkWell(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const SignupScreen(),
+                          ),
+                        ),
+                        child: const Text(
+                          "Register Now",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
@@ -218,19 +227,24 @@ class CustomTextFormField extends StatelessWidget {
   }
 }
 
-Container OAuth2LoginBox(Color color, String imageName) {
-  return Container(
-    width: 50,
-    height: 50,
-    decoration: BoxDecoration(
-      color: color,
-      borderRadius: BorderRadius.circular(50),
-    ),
-    child: Center(
-      child: SvgPicture.asset(
-        "assets/svg/$imageName.svg",
-        width: 40,
-        height: 40,
+Widget OAuth2LoginBox(Color color, String imageName) {
+  return InkWell(
+    onTap: () {
+      print("Clicked");
+    },
+    child: Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: Center(
+        child: SvgPicture.asset(
+          "assets/svg/$imageName.svg",
+          width: 40,
+          height: 40,
+        ),
       ),
     ),
   );

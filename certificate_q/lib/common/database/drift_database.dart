@@ -36,7 +36,7 @@ class LocalDatabase extends _$LocalDatabase {
   }
 
   void createLanguagies(List<LanguageModel> languagies) {
-    for (var language in languagies) {
+    for (LanguageModel language in languagies) {
       createLanguage(language.toLanguageCompanion());
     }
   }
@@ -48,7 +48,7 @@ class LocalDatabase extends _$LocalDatabase {
         .map((lang) => LanguageModel(
               // id: lang.id,
               languageTitle: lang.languageTitle,
-              languageType: lang.languageType,
+              languageType: getLanguageTypeFromString(lang.languageType),
               // createAt: lang.createdAt,
             ))
         .toList();

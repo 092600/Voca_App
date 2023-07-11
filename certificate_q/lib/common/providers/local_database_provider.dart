@@ -1,6 +1,7 @@
 import 'package:certificate_q/common/data/model/word/language_type.dart';
 import 'package:flutter/material.dart';
 
+import '../data/model/language/language_model.dart';
 import '../data/model/word/word.dart';
 import '../database/drift_database.dart';
 
@@ -36,5 +37,13 @@ class LocalDatabaseProvider extends ChangeNotifier {
   }) {
     return localDatabase.findWordsByLanguageTypeAndTheme(
         theme: theme, type: type);
+  }
+
+  // void createLanguagies() {
+  //   _localDatabase.createLanguagies(defaultLanguageModels);
+  // }
+
+  Future<List<LanguageModel>> findAllLanguagies() {
+    return _localDatabase.findAllLanguagies();
   }
 }

@@ -4,7 +4,6 @@ class LanguageTable extends Table {
   // PK, AUTO_INCREMENT
   IntColumn get id => integer().autoIncrement()();
 
-  // ENG. JP, ...
   TextColumn get languageType => text()();
 
   TextColumn get languageTitle => text()();
