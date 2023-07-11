@@ -20,6 +20,10 @@
 
 아래와 같이 앱 바 오른쪽 상단 > 로그아웃 버튼을 눌러 로그아웃 할 수 있습니다.
 
+- 로그아웃
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/logout.gif">
+
 #### 2-1-2. 회원가입
 
 - 회원가입 페이지
