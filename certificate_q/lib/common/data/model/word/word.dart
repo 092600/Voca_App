@@ -1,49 +1,55 @@
+import 'package:certificate_q/common/data/model/word/word_meaning.dart';
 import 'package:drift/drift.dart';
 
 import '../../database/drift_database.dart';
 import 'type/language_type.dart';
 
 abstract class Word {
+  late int _id;
   late String _theme;
-  late String _spelling;
-  late String _pronunciation;
-  late List<String> _meanings;
+
   late LanguageType _type;
 
+  late String _spelling;
+  late String _pronunciation;
+
+  late List<WordMeaning> _meanings;
+
+  int get id => _id;
   String get theme => _theme;
-  String get spelling => _spelling;
-  String get pronunciation => _pronunciation;
-  List<String> get meanings => _meanings;
+
   LanguageType get type => _type;
 
-  WordTableCompanion toWordCompanion(String? updateTheme) {
-    final themeValue = updateTheme != null ? Value(updateTheme) : Value(theme);
+  String get spelling => _spelling;
+  String get pronunciation => _pronunciation;
+
+  List<WordMeaning> get meanings => _meanings;
+
+  set meanings(List<WordMeaning> meanings) {
+    _meanings = meanings;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "theme": theme,
+      "type": type.name,
+      "spelling": spelling,
+      "pronunciation": pronunciation,
+      "meanings": meanings.map((meaning) => meaning.toJson()).toList(),
+    };
+  }
+
+  WordTableCompanion toWordCompanion() {
+    // final themeValue = updateTheme != null ? Value(updateTheme) : Value(theme);
 
     return WordTableCompanion(
-      theme: themeValue,
+      id: Value(id),
+      theme: Value(theme),
       spelling: Value(spelling),
       pronunciation: Value(pronunciation) ?? const Value(""),
       meanings: Value(meanings.join(',')),
       languageType: Value(type.toString()),
     );
   }
-
-  // Word.fromJson(Map<String, dynamic> json) {
-  //   print(json);
-  //   LanguageType type = getLanguageTypeFromString(json['type'] as String);
-
-  //   final theme = json['theme'] as String;
-  //   final spelling = json['spelling'] as String;
-  //   final pronunciation = json['pronunciation'] as String;
-  //   final meanings = (json['meanings'] as String).split(',');
-  // final type = getLanguageTypeFromString(json['type'] as String);
-
-  // return Word(
-  //   theme: theme,
-  //   spelling: spelling,
-  //   pronunciation: pronunciation,
-  //   meanings: meanings,
-  //   type: type,
-  // );
-  // }
 }

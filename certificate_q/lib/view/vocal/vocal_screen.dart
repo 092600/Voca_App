@@ -1,3 +1,4 @@
+import 'package:certificate_q/common/data/model/word/type/language_type.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/component/custom_app_bar.dart';
@@ -20,12 +21,15 @@ class VocalScreen extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate(
-              languagies.keys.map(
-                (key) {
+              LanguageType.values.map(
+                (type) {
                   return VocalSelectCard(
-                    isTheme: false,
-                    theme: key,
-                    languageType: languagies[key]!,
+                    title: getFullName(type
+                        .name), // VocalSelectCard가 LanguageName을 보여주도록 title > LanguageType.name
+
+                    isTheme:
+                        false, // Words의 Theme이 아니라 LanguageType이 들어가므로 false
+                    languageType: type,
                   );
                 },
               ).toList(),

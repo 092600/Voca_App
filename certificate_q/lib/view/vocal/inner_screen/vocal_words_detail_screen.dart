@@ -2,13 +2,13 @@ import 'package:certificate_q/common/data/model/word/word.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../common/component/custom_app_bar.dart';
-import '../../common/const/default.dart';
+import '../../../common/component/custom_app_bar.dart';
+import '../../../common/const/default.dart';
 
-class VocalIncorrectWordsScreen extends StatelessWidget {
+class VocalWordsDetailsScreen extends StatelessWidget {
   List<Word> incorrectWords;
 
-  VocalIncorrectWordsScreen({
+  VocalWordsDetailsScreen({
     required this.incorrectWords,
     super.key,
   });
@@ -59,7 +59,10 @@ class VocalIncorrectWordsScreen extends StatelessWidget {
                                             height: 3,
                                           ),
                                           Container(
-                                            child: Text("${word.meanings}"),
+                                            child: Text(word.meanings
+                                                .map((meaning) =>
+                                                    meaning.meaning)
+                                                .join("")),
                                           )
                                         ],
                                       ),

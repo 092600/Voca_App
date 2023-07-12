@@ -22,14 +22,6 @@ public interface WordRepository extends JpaRepository<Word, Long> {
             "JOIN FETCH w.meanings " +
             "WHERE w.languageType = :type")
     List<Word> getWordByLanguageType(@Param("type") String type);
-//    @Query("SELECT DISTINCT new com.example.cert_q_server.domain.word.dto.WordDto(w) " +
-//            "FROM Word w " +
-//            "JOIN FETCH w.meanings " +
-//            "WHERE w.languageType = :type")
-//    List<WordDto> findWordDtoByLanguageType(@Param("type") String type);
-
-//    @Query("SELECT w FROM Word w JOIN FETCH w.meanings WHERE w.languageType = :type")
-//    List<Word> findWordByLanguageType(@Param("type") String type);
 
 
 }

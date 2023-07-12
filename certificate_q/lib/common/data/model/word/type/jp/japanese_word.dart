@@ -1,8 +1,12 @@
-import 'package:certificate_q/common/data/model/word/word.dart';
+import 'package:certificate_q/common/data/model/word/word_meaning.dart';
 
+import '../../word.dart';
 import '../language_type.dart';
 
 class JapaneseWord extends Word {
+  @override
+  final int id;
+
   @override
   final String theme;
 
@@ -13,9 +17,10 @@ class JapaneseWord extends Word {
   final String pronunciation;
 
   @override
-  final List<String> meanings;
+  final List<WordMeaning> meanings;
 
   JapaneseWord({
+    required this.id,
     required this.spelling,
     required this.pronunciation,
     required this.meanings,

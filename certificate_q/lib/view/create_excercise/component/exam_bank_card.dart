@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/const/default.dart';
 import '../../../common/data/model/word/word.dart';
+import '../../../common/providers/local_database_provider.dart';
 
 class ExamBankCard extends StatelessWidget {
-  final String title;
+  final String theme;
   final List<Word> questions;
-  const ExamBankCard({required this.title, required this.questions, super.key});
+  final Function() onTap;
+
+  bool isInstalled = false;
+
+  ExamBankCard({
+    required this.theme,
+    required this.questions,
+    required this.onTap,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final localDatabaseProvider = Provider.of<LocalDatabaseProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3),
       child: Container(
@@ -37,7 +50,7 @@ class ExamBankCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
+                          theme,
                           style: GoogleFonts.bebasNeue(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -45,25 +58,6 @@ class ExamBankCard extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            // const Text(
-                            //   "챕터 ",
-                            //   style: TextStyle(
-                            //     fontSize: 13,
-                            //   ),
-                            // ),
-                            // Text(
-                            //   "9",
-                            //   style: TextStyle(
-                            //     color: primaryColor,
-                            //     fontSize: 14,
-                            //   ),
-                            // ),
-                            // const Text(
-                            //   " | ",
-                            //   style: TextStyle(
-                            //     fontSize: 13,
-                            //   ),
-                            // ),
                             const Text(
                               "문제 ",
                               style: TextStyle(
@@ -83,14 +77,17 @@ class ExamBankCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Center(
-                    child: Icon(
-                      Icons.download,
-                      size: 30,
-                      color: Colors.grey,
+                InkWell(
+                  onTap: onTap,
+                  child: const SizedBox(
+                    height: 40,
+                    width: 40,
+                    child: Center(
+                      child: Icon(
+                        Icons.download,
+                        size: 30,
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
                 ),

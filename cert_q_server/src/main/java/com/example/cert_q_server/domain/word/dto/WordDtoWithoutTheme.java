@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class WordDtoWithoutTheme
 {
+    private Long id;
     private String spelling;
     private String pronunciation;
 
@@ -24,6 +25,7 @@ public class WordDtoWithoutTheme
 
 
     public WordDtoWithoutTheme(Word word) {
+        this.id = word.getId();
         this.spelling = word.getSpelling();
         this.pronunciation = word.getPronunciation();
         this.languageType = word.getLanguageType();

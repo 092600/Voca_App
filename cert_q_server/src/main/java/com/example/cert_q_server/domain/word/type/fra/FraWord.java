@@ -1,4 +1,4 @@
-package com.example.cert_q_server.domain.word.type.eng;
+package com.example.cert_q_server.domain.word.type.fra;
 
 import com.example.cert_q_server.domain.word.Word;
 import lombok.AccessLevel;
@@ -10,10 +10,11 @@ import javax.persistence.Entity;
 
 @Getter
 @Entity
-@DiscriminatorValue("ENG")
+@DiscriminatorValue("FR")
 @NoArgsConstructor(
         access = AccessLevel.PROTECTED
 )
-public class EngWord extends Word {
+public class FraWord extends Word {
+
 
 }

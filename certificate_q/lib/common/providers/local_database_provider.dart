@@ -2,7 +2,6 @@ import 'package:certificate_q/common/data/model/word/type/language_type.dart';
 import 'package:flutter/material.dart';
 
 import '../data/database/drift_database.dart';
-import '../data/model/language/language_model.dart';
 import '../data/model/word/word.dart';
 
 class LocalDatabaseProvider extends ChangeNotifier {
@@ -23,12 +22,23 @@ class LocalDatabaseProvider extends ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<List<Word>> findWordsByLanguageType(LanguageType type) {
-    return localDatabase.findWordsByLanguageType(type);
+  saveWords({required List<Word> words}) {
+    for (Word word in words) {
+      localDatabase.saveWords(word.toWordCompanion());
+      localDatabase.saveWordMeaning(word.meanings, word);
+    }
   }
 
-  Future<Set<String>> findWordsThemeByLanguageType(LanguageType type) {
-    return localDatabase.findWordsThemeByLanguageType(type: type);
+  Future<Set<String>> findWordsThemes() async {
+    return await localDatabase.findWordsThemes();
+  }
+
+  Future<Set<String>> findWordThemesByLanguageType({
+    required LanguageType type,
+  }) async {
+    return await localDatabase.findWordsThemeByLanguageType(
+      type: type,
+    );
   }
 
   Future<List<Word>> findWordsByLanguageTypeAndTheme({
@@ -36,14 +46,12 @@ class LocalDatabaseProvider extends ChangeNotifier {
     required String theme,
   }) {
     return localDatabase.findWordsByLanguageTypeAndTheme(
-        theme: theme, type: type);
+      theme: theme,
+      type: type,
+    );
   }
 
   // void createLanguagies() {
   //   _localDatabase.createLanguagies(defaultLanguageModels);
   // }
-
-  Future<List<LanguageModel>> findAllLanguagies() {
-    return _localDatabase.findAllLanguagies();
-  }
 }

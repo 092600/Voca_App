@@ -1,14 +1,15 @@
+import 'package:certificate_q/common/data/model/word/word_meaning.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../../common/const/default.dart';
 
 class TestChoiceContainer extends StatelessWidget {
-  final String content;
+  final List<WordMeaning> meanings;
   final Function() clickedEvent;
 
   const TestChoiceContainer({
-    required this.content,
+    required this.meanings,
     required this.clickedEvent,
     super.key,
   });
@@ -26,7 +27,7 @@ class TestChoiceContainer extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            content,
+            meanings.map((meaning) => meaning.meaning).toList().join(", "),
             style: GoogleFonts.bebasNeue(
               fontSize: 15,
               fontWeight: FontWeight.w600,

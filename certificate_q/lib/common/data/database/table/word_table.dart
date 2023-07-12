@@ -1,7 +1,7 @@
+import 'package:certificate_q/common/data/model/word/word.dart';
 import 'package:drift/drift.dart';
 
 import '../drift_database.dart';
-import '../../model/word/word.dart';
 
 class WordTable extends Table {
   // PK, AUTO_INCREMENT
@@ -14,6 +14,7 @@ class WordTable extends Table {
 
   TextColumn get spelling => text()();
   TextColumn get pronunciation => text()();
+
   TextColumn get meanings => text()();
 
   // CreatedTime
@@ -26,7 +27,6 @@ class WordTable extends Table {
       languageType: Value(word.type.toString()),
       spelling: Value(word.spelling),
       pronunciation: Value(word.pronunciation),
-      meanings: Value(word.meanings.join(',')),
     );
   }
 }

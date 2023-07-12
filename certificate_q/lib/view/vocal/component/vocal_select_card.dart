@@ -9,12 +9,12 @@ import '../../../common/providers/local_database_provider.dart';
 import '../inner_screen/vocal_test_type_select_screen.dart';
 
 class VocalSelectCard extends StatelessWidget {
-  final String theme;
+  final String title;
   final bool isTheme;
   final LanguageType languageType;
 
   const VocalSelectCard({
-    required this.theme,
+    required this.title,
     required this.isTheme,
     required this.languageType,
     super.key,
@@ -29,7 +29,7 @@ class VocalSelectCard extends StatelessWidget {
       child: FutureBuilder<List<Word>>(
         future: localDatabaseProvider.findWordsByLanguageTypeAndTheme(
           type: languageType,
-          theme: theme,
+          theme: title,
         ),
         builder: (context, AsyncSnapshot<List<Word>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -49,12 +49,17 @@ class VocalSelectCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 child: InkWell(
                   onTap: () {
+                    // VocalSelectCard Theme 값에 따라
+                    // 1. Theme 값을 받은 경우,
+                    //    Words Test Type 선택 > VocalTestTypeSelectScreen();
+                    // 2. Theme이 아닌 LanguageType을 받은 경우,
+                    //    공부할 단어의 Theme을 선택하도록 > VocalThemeSelectScreen();
                     isTheme
                         ? Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (_) => VocalTestTypeSelectScreen(
-                                theme: theme,
+                                theme: title,
                                 languageType: languageType,
                                 questions: questions,
                               ),
@@ -64,7 +69,7 @@ class VocalSelectCard extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (_) => VocalThemeSelectScreen(
-                                theme: theme,
+                                theme: title,
                                 languageType: languageType,
                               ),
                             ),
@@ -81,7 +86,7 @@ class VocalSelectCard extends StatelessWidget {
                             children: [
                               Container(
                                 child: Text(
-                                  theme,
+                                  title,
                                   style: GoogleFonts.bebasNeue(
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,

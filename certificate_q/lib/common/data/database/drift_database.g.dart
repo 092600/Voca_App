@@ -366,12 +366,12 @@ class WordTableCompanion extends UpdateCompanion<WordTableData> {
   }
 }
 
-class $LanguageTableTable extends LanguageTable
-    with TableInfo<$LanguageTableTable, LanguageTableData> {
+class $WordMeaningTableTable extends WordMeaningTable
+    with TableInfo<$WordMeaningTableTable, WordMeaningTableData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
-  $LanguageTableTable(this.attachedDatabase, [this._alias]);
+  $WordMeaningTableTable(this.attachedDatabase, [this._alias]);
   static const VerificationMeta _idMeta = const VerificationMeta('id');
   @override
   late final GeneratedColumn<int> id = GeneratedColumn<int>(
@@ -381,60 +381,47 @@ class $LanguageTableTable extends LanguageTable
       requiredDuringInsert: false,
       defaultConstraints:
           GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _languageTypeMeta =
-      const VerificationMeta('languageType');
+  static const VerificationMeta _meaningMeta =
+      const VerificationMeta('meaning');
   @override
-  late final GeneratedColumn<String> languageType = GeneratedColumn<String>(
-      'language_type', aliasedName, false,
+  late final GeneratedColumn<String> meaning = GeneratedColumn<String>(
+      'meaning', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _languageTitleMeta =
-      const VerificationMeta('languageTitle');
+  static const VerificationMeta _wordTableIdMeta =
+      const VerificationMeta('wordTableId');
   @override
-  late final GeneratedColumn<String> languageTitle = GeneratedColumn<String>(
-      'language_title', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
-  @override
-  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
-      'created_at', aliasedName, false,
-      type: DriftSqlType.dateTime,
+  late final GeneratedColumn<int> wordTableId = GeneratedColumn<int>(
+      'word_table_id', aliasedName, true,
+      type: DriftSqlType.int,
       requiredDuringInsert: false,
-      clientDefault: () => DateTime.now());
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES word_table (id)'));
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, languageType, languageTitle, createdAt];
+  List<GeneratedColumn> get $columns => [id, meaning, wordTableId];
   @override
-  String get aliasedName => _alias ?? 'language_table';
+  String get aliasedName => _alias ?? 'word_meaning_table';
   @override
-  String get actualTableName => 'language_table';
+  String get actualTableName => 'word_meaning_table';
   @override
-  VerificationContext validateIntegrity(Insertable<LanguageTableData> instance,
+  VerificationContext validateIntegrity(
+      Insertable<WordMeaningTableData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
     }
-    if (data.containsKey('language_type')) {
-      context.handle(
-          _languageTypeMeta,
-          languageType.isAcceptableOrUnknown(
-              data['language_type']!, _languageTypeMeta));
+    if (data.containsKey('meaning')) {
+      context.handle(_meaningMeta,
+          meaning.isAcceptableOrUnknown(data['meaning']!, _meaningMeta));
     } else if (isInserting) {
-      context.missing(_languageTypeMeta);
+      context.missing(_meaningMeta);
     }
-    if (data.containsKey('language_title')) {
+    if (data.containsKey('word_table_id')) {
       context.handle(
-          _languageTitleMeta,
-          languageTitle.isAcceptableOrUnknown(
-              data['language_title']!, _languageTitleMeta));
-    } else if (isInserting) {
-      context.missing(_languageTitleMeta);
-    }
-    if (data.containsKey('created_at')) {
-      context.handle(_createdAtMeta,
-          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+          _wordTableIdMeta,
+          wordTableId.isAcceptableOrUnknown(
+              data['word_table_id']!, _wordTableIdMeta));
     }
     return context;
   }
@@ -442,64 +429,59 @@ class $LanguageTableTable extends LanguageTable
   @override
   Set<GeneratedColumn> get $primaryKey => {id};
   @override
-  LanguageTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  WordMeaningTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return LanguageTableData(
+    return WordMeaningTableData(
       id: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
-      languageType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}language_type'])!,
-      languageTitle: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}language_title'])!,
-      createdAt: attachedDatabase.typeMapping
-          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      meaning: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}meaning'])!,
+      wordTableId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}word_table_id']),
     );
   }
 
   @override
-  $LanguageTableTable createAlias(String alias) {
-    return $LanguageTableTable(attachedDatabase, alias);
+  $WordMeaningTableTable createAlias(String alias) {
+    return $WordMeaningTableTable(attachedDatabase, alias);
   }
 }
 
-class LanguageTableData extends DataClass
-    implements Insertable<LanguageTableData> {
+class WordMeaningTableData extends DataClass
+    implements Insertable<WordMeaningTableData> {
   final int id;
-  final String languageType;
-  final String languageTitle;
-  final DateTime createdAt;
-  const LanguageTableData(
-      {required this.id,
-      required this.languageType,
-      required this.languageTitle,
-      required this.createdAt});
+  final String meaning;
+  final int? wordTableId;
+  const WordMeaningTableData(
+      {required this.id, required this.meaning, this.wordTableId});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['id'] = Variable<int>(id);
-    map['language_type'] = Variable<String>(languageType);
-    map['language_title'] = Variable<String>(languageTitle);
-    map['created_at'] = Variable<DateTime>(createdAt);
+    map['meaning'] = Variable<String>(meaning);
+    if (!nullToAbsent || wordTableId != null) {
+      map['word_table_id'] = Variable<int>(wordTableId);
+    }
     return map;
   }
 
-  LanguageTableCompanion toCompanion(bool nullToAbsent) {
-    return LanguageTableCompanion(
+  WordMeaningTableCompanion toCompanion(bool nullToAbsent) {
+    return WordMeaningTableCompanion(
       id: Value(id),
-      languageType: Value(languageType),
-      languageTitle: Value(languageTitle),
-      createdAt: Value(createdAt),
+      meaning: Value(meaning),
+      wordTableId: wordTableId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(wordTableId),
     );
   }
 
-  factory LanguageTableData.fromJson(Map<String, dynamic> json,
+  factory WordMeaningTableData.fromJson(Map<String, dynamic> json,
       {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
-    return LanguageTableData(
+    return WordMeaningTableData(
       id: serializer.fromJson<int>(json['id']),
-      languageType: serializer.fromJson<String>(json['languageType']),
-      languageTitle: serializer.fromJson<String>(json['languageTitle']),
-      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+      meaning: serializer.fromJson<String>(json['meaning']),
+      wordTableId: serializer.fromJson<int?>(json['wordTableId']),
     );
   }
   @override
@@ -507,88 +489,73 @@ class LanguageTableData extends DataClass
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
-      'languageType': serializer.toJson<String>(languageType),
-      'languageTitle': serializer.toJson<String>(languageTitle),
-      'createdAt': serializer.toJson<DateTime>(createdAt),
+      'meaning': serializer.toJson<String>(meaning),
+      'wordTableId': serializer.toJson<int?>(wordTableId),
     };
   }
 
-  LanguageTableData copyWith(
+  WordMeaningTableData copyWith(
           {int? id,
-          String? languageType,
-          String? languageTitle,
-          DateTime? createdAt}) =>
-      LanguageTableData(
+          String? meaning,
+          Value<int?> wordTableId = const Value.absent()}) =>
+      WordMeaningTableData(
         id: id ?? this.id,
-        languageType: languageType ?? this.languageType,
-        languageTitle: languageTitle ?? this.languageTitle,
-        createdAt: createdAt ?? this.createdAt,
+        meaning: meaning ?? this.meaning,
+        wordTableId: wordTableId.present ? wordTableId.value : this.wordTableId,
       );
   @override
   String toString() {
-    return (StringBuffer('LanguageTableData(')
+    return (StringBuffer('WordMeaningTableData(')
           ..write('id: $id, ')
-          ..write('languageType: $languageType, ')
-          ..write('languageTitle: $languageTitle, ')
-          ..write('createdAt: $createdAt')
+          ..write('meaning: $meaning, ')
+          ..write('wordTableId: $wordTableId')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, languageType, languageTitle, createdAt);
+  int get hashCode => Object.hash(id, meaning, wordTableId);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is LanguageTableData &&
+      (other is WordMeaningTableData &&
           other.id == this.id &&
-          other.languageType == this.languageType &&
-          other.languageTitle == this.languageTitle &&
-          other.createdAt == this.createdAt);
+          other.meaning == this.meaning &&
+          other.wordTableId == this.wordTableId);
 }
 
-class LanguageTableCompanion extends UpdateCompanion<LanguageTableData> {
+class WordMeaningTableCompanion extends UpdateCompanion<WordMeaningTableData> {
   final Value<int> id;
-  final Value<String> languageType;
-  final Value<String> languageTitle;
-  final Value<DateTime> createdAt;
-  const LanguageTableCompanion({
+  final Value<String> meaning;
+  final Value<int?> wordTableId;
+  const WordMeaningTableCompanion({
     this.id = const Value.absent(),
-    this.languageType = const Value.absent(),
-    this.languageTitle = const Value.absent(),
-    this.createdAt = const Value.absent(),
+    this.meaning = const Value.absent(),
+    this.wordTableId = const Value.absent(),
   });
-  LanguageTableCompanion.insert({
+  WordMeaningTableCompanion.insert({
     this.id = const Value.absent(),
-    required String languageType,
-    required String languageTitle,
-    this.createdAt = const Value.absent(),
-  })  : languageType = Value(languageType),
-        languageTitle = Value(languageTitle);
-  static Insertable<LanguageTableData> custom({
+    required String meaning,
+    this.wordTableId = const Value.absent(),
+  }) : meaning = Value(meaning);
+  static Insertable<WordMeaningTableData> custom({
     Expression<int>? id,
-    Expression<String>? languageType,
-    Expression<String>? languageTitle,
-    Expression<DateTime>? createdAt,
+    Expression<String>? meaning,
+    Expression<int>? wordTableId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (languageType != null) 'language_type': languageType,
-      if (languageTitle != null) 'language_title': languageTitle,
-      if (createdAt != null) 'created_at': createdAt,
+      if (meaning != null) 'meaning': meaning,
+      if (wordTableId != null) 'word_table_id': wordTableId,
     });
   }
 
-  LanguageTableCompanion copyWith(
-      {Value<int>? id,
-      Value<String>? languageType,
-      Value<String>? languageTitle,
-      Value<DateTime>? createdAt}) {
-    return LanguageTableCompanion(
+  WordMeaningTableCompanion copyWith(
+      {Value<int>? id, Value<String>? meaning, Value<int?>? wordTableId}) {
+    return WordMeaningTableCompanion(
       id: id ?? this.id,
-      languageType: languageType ?? this.languageType,
-      languageTitle: languageTitle ?? this.languageTitle,
-      createdAt: createdAt ?? this.createdAt,
+      meaning: meaning ?? this.meaning,
+      wordTableId: wordTableId ?? this.wordTableId,
     );
   }
 
@@ -598,25 +565,21 @@ class LanguageTableCompanion extends UpdateCompanion<LanguageTableData> {
     if (id.present) {
       map['id'] = Variable<int>(id.value);
     }
-    if (languageType.present) {
-      map['language_type'] = Variable<String>(languageType.value);
+    if (meaning.present) {
+      map['meaning'] = Variable<String>(meaning.value);
     }
-    if (languageTitle.present) {
-      map['language_title'] = Variable<String>(languageTitle.value);
-    }
-    if (createdAt.present) {
-      map['created_at'] = Variable<DateTime>(createdAt.value);
+    if (wordTableId.present) {
+      map['word_table_id'] = Variable<int>(wordTableId.value);
     }
     return map;
   }
 
   @override
   String toString() {
-    return (StringBuffer('LanguageTableCompanion(')
+    return (StringBuffer('WordMeaningTableCompanion(')
           ..write('id: $id, ')
-          ..write('languageType: $languageType, ')
-          ..write('languageTitle: $languageTitle, ')
-          ..write('createdAt: $createdAt')
+          ..write('meaning: $meaning, ')
+          ..write('wordTableId: $wordTableId')
           ..write(')'))
         .toString();
   }
@@ -625,11 +588,12 @@ class LanguageTableCompanion extends UpdateCompanion<LanguageTableData> {
 abstract class _$LocalDatabase extends GeneratedDatabase {
   _$LocalDatabase(QueryExecutor e) : super(e);
   late final $WordTableTable wordTable = $WordTableTable(this);
-  late final $LanguageTableTable languageTable = $LanguageTableTable(this);
+  late final $WordMeaningTableTable wordMeaningTable =
+      $WordMeaningTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [wordTable, languageTable];
+      [wordTable, wordMeaningTable];
 }

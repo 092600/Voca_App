@@ -33,8 +33,9 @@ class VocalThemeSelectScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: FutureBuilder<Set<String>>(
-              future: localDatabaseProvider
-                  .findWordsThemeByLanguageType(languageType),
+              future: localDatabaseProvider.findWordThemesByLanguageType(
+                type: languageType,
+              ),
               builder:
                   (BuildContext context, AsyncSnapshot<Set<String>> snapshot) {
                 if (snapshot.hasData) {
@@ -45,7 +46,7 @@ class VocalThemeSelectScreen extends StatelessWidget {
                         .map(
                           (theme) => VocalSelectCard(
                             isTheme: true,
-                            theme: theme,
+                            title: theme,
                             languageType: languageType,
                           ),
                         )

@@ -1,4 +1,4 @@
-import 'package:certificate_q/common/const/default.dart';
+import 'package:certificate_q/common/data/model/word/word_meaning.dart';
 import 'package:certificate_q/view/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -6,8 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'common/data/database/drift_database.dart';
-import 'common/data/utils/managing_datas.dart';
-import 'common/data/model/word/word.dart';
 
 import 'common/providers/local_database_provider.dart';
 import 'common/providers/security_storage_provider.dart';
@@ -22,22 +20,13 @@ void main() async {
   const storage = FlutterSecureStorage();
   final db = LocalDatabase();
 
-  // db.delWords();
+  List<WordMeaning> test = await db.findAllWordMeanings();
 
-  List<Word> words = await db.findAllWords();
-
-  // 샘플 데이터 추가하기
-  if (words.isEmpty) {
-    insertSampleWordsIntoDB(db);
-    db.createLanguagies(defaultLanguageModels);
-  }
+  db.delWords2();
 
   runApp(
     MultiProvider(
       providers: [
-        // ChangeNotifierProvider<WordsProvider>(
-        //   create: (_) => WordsProvider(),
-        // ),SecurityStorageProvider
         ChangeNotifierProvider<SecurityStorageProvider>(
           create: (_) => SecurityStorageProvider(storage),
         ),

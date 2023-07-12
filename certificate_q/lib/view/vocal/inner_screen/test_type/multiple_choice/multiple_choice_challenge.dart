@@ -6,10 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../common/component/custom_app_bar.dart';
 import '../../../../../common/const/default.dart';
+import '../../../../../common/data/model/word/word.dart';
 import '../../../../../common/data/utils/managing_datas.dart';
 import '../../../../../common/data/model/word/type/language_type.dart';
-import '../../../../../common/data/model/word/word.dart';
-import '../../../vocal_incorrect_words_screen.dart';
+import '../../vocal_words_detail_screen.dart';
 import 'component/test_choice_container.dart';
 
 class MultipleChoiceChallengeScreen extends StatefulWidget {
@@ -54,7 +54,7 @@ class _MultipleChoiceChallengeScreenState
       setState(() {
         isLoaded = true;
 
-        if ((correct + nonCorrect) != 39) {
+        if ((correct + nonCorrect) != questions.length - 1) {
           if (isAnswer) {
             correct++;
           } else {
@@ -141,7 +141,7 @@ class _MultipleChoiceChallengeScreenState
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => VocalIncorrectWordsScreen(
+                        builder: (context) => VocalWordsDetailsScreen(
                           incorrectWords: incorrectWords,
                         ),
                       ),
@@ -263,7 +263,7 @@ class AnswerContainer extends StatelessWidget {
           ...answers
               .map(
                 (answer) => TestChoiceContainer(
-                  content: answer.meanings.join(", "),
+                  meanings: answer.meanings,
                   clickedEvent: () => answerClickedEvent(
                       question.spelling == answer.spelling, question),
                 ),
