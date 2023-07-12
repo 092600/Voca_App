@@ -1,7 +1,7 @@
 import 'package:certificate_q/common/data/model/language/language_model.dart';
 import 'package:flutter/material.dart';
 
-import '../data/model/word/language_type.dart';
+import '../data/model/word/type/language_type.dart';
 
 // color
 Color? backgroundColor = Colors.grey[300];
@@ -21,3 +21,5 @@ List<LanguageModel> defaultLanguageModels = [
   LanguageModel(languageTitle: "Japanese", languageType: LanguageType.JP),
   LanguageModel(languageTitle: "English", languageType: LanguageType.ENG),
 ];
+
+const SERVER_IP = "http://localhost:8080";

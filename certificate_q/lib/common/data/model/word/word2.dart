@@ -1,32 +1,37 @@
-import 'package:drift/drift.dart';
+import 'package:certificate_q/common/data/model/word/word_meaning.dart';
 
-import '../../database/drift_database.dart';
 import 'type/language_type.dart';
 
-abstract class Word {
+abstract class Word2 {
   late String _theme;
-  late String _spelling;
-  late String _pronunciation;
-  late List<String> _meanings;
+
   late LanguageType _type;
 
+  late String _spelling;
+  late String _pronunciation;
+
+  late List<WordMeaning> _meanings;
+
   String get theme => _theme;
-  String get spelling => _spelling;
-  String get pronunciation => _pronunciation;
-  List<String> get meanings => _meanings;
+
   LanguageType get type => _type;
 
-  WordTableCompanion toWordCompanion(String? updateTheme) {
-    final themeValue = updateTheme != null ? Value(updateTheme) : Value(theme);
+  String get spelling => _spelling;
+  String get pronunciation => _pronunciation;
 
-    return WordTableCompanion(
-      theme: themeValue,
-      spelling: Value(spelling),
-      pronunciation: Value(pronunciation) ?? const Value(""),
-      meanings: Value(meanings.join(',')),
-      languageType: Value(type.toString()),
-    );
-  }
+  List<WordMeaning> get meanings => _meanings;
+
+  // WordTableCompanion toWordCompanion(String? updateTheme) {
+  //   final themeValue = updateTheme != null ? Value(updateTheme) : Value(theme);
+
+  //   return WordTableCompanion(
+  //     theme: themeValue,
+  //     spelling: Value(spelling),
+  //     pronunciation: Value(pronunciation) ?? const Value(""),
+  //     meanings: Value(meanings.join(',')),
+  //     languageType: Value(type.toString()),
+  //   );
+  // }
 
   // Word.fromJson(Map<String, dynamic> json) {
   //   print(json);

@@ -1,9 +1,9 @@
-import 'package:certificate_q/common/data/model/word/language_type.dart';
+import 'package:certificate_q/common/data/model/word/type/language_type.dart';
 import 'package:flutter/material.dart';
 
+import '../data/database/drift_database.dart';
 import '../data/model/language/language_model.dart';
 import '../data/model/word/word.dart';
-import '../database/drift_database.dart';
 
 class LocalDatabaseProvider extends ChangeNotifier {
   late final LocalDatabase _localDatabase;

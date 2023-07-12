@@ -1,4 +1,4 @@
-import 'package:certificate_q/common/data/model/word/language_type.dart';
+import 'package:certificate_q/common/data/model/word/type/language_type.dart';
 import 'package:certificate_q/view/vocal/inner_screen/vocal_theme_select_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

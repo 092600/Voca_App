@@ -1,18 +1,18 @@
 import 'dart:io';
 
 import 'package:certificate_q/common/data/model/language/language_model.dart';
-import 'package:certificate_q/common/data/model/word/language_type.dart';
-import 'package:certificate_q/common/data/table/languagies_table.dart';
+import 'package:certificate_q/common/data/model/word/type/language_type.dart';
+import 'package:certificate_q/common/data/database/table/languagies_table.dart';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../data/model/english_word.dart';
-import '../data/model/word/japanese_word.dart';
-import '../data/model/word/word.dart';
-import '../data/table/word_table.dart';
-
 import 'package:path/path.dart' as p;
+
+import '../model/word/type/eng/english_word.dart';
+import '../model/word/type/jp/japanese_word.dart';
+import '../model/word/word.dart';
+import 'table/word_table.dart';
 
 part 'drift_database.g.dart';
 

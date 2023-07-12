@@ -1,6 +1,8 @@
-import 'package:certificate_q/common/data/model/word/language_type.dart';
-import 'package:certificate_q/common/database/drift_database.dart';
+import 'package:certificate_q/common/data/model/word/type/language_type.dart';
+
 import 'package:drift/drift.dart';
+
+import '../../database/drift_database.dart';
 
 class LanguageModel {
   // final int id;

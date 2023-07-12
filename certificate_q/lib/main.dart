@@ -5,9 +5,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'common/data/managing_datas.dart';
+import 'common/data/database/drift_database.dart';
+import 'common/data/utils/managing_datas.dart';
 import 'common/data/model/word/word.dart';
-import 'common/database/drift_database.dart';
+
 import 'common/providers/local_database_provider.dart';
 import 'common/providers/security_storage_provider.dart';
 import 'layout/home_layout.dart';
@@ -30,15 +31,6 @@ void main() async {
     insertSampleWordsIntoDB(db);
     db.createLanguagies(defaultLanguageModels);
   }
-
-  // List<Word> themeWords = await db.findWordByTheme(theme: "N3_사람사귀기, 관계 유지하기");
-
-  // print(themeWords);
-
-  // // CSV 파일을 읽어서 데이터 초기화
-  // wordsProvider.init();
-  // wordsProvider.loadJapaneseWords();
-  // wordsProvider.loadEnglishWords();
 
   runApp(
     MultiProvider(

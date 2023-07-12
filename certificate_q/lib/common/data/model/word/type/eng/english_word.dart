@@ -1,4 +1,4 @@
-import 'package:certificate_q/common/data/model/word/language_type.dart';
+import 'package:certificate_q/common/data/model/word/type/language_type.dart';
 import 'package:certificate_q/common/data/model/word/word.dart';
 
 class EnglishWord extends Word {

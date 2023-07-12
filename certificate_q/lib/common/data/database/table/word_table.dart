@@ -1,7 +1,7 @@
 import 'package:drift/drift.dart';
 
-import '../../database/drift_database.dart';
-import '../model/word/word.dart';
+import '../drift_database.dart';
+import '../../model/word/word.dart';
 
 class WordTable extends Table {
   // PK, AUTO_INCREMENT

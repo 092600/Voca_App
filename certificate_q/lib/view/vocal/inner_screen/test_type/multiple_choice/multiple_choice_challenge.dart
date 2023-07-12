@@ -6,8 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../common/component/custom_app_bar.dart';
 import '../../../../../common/const/default.dart';
-import '../../../../../common/data/managing_datas.dart';
-import '../../../../../common/data/model/word/language_type.dart';
+import '../../../../../common/data/utils/managing_datas.dart';
+import '../../../../../common/data/model/word/type/language_type.dart';
 import '../../../../../common/data/model/word/word.dart';
 import '../../../vocal_incorrect_words_screen.dart';
 import 'component/test_choice_container.dart';

@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../common/component/custom_app_bar.dart';
 import '../../../common/const/default.dart';
 import '../../../common/const/test_type.dart';
-import '../../../common/data/model/word/language_type.dart';
+import '../../../common/data/model/word/type/language_type.dart';
 import '../../../common/data/model/word/word.dart';
 
 class VocalTestTypeSelectScreen extends StatelessWidget {

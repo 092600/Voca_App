@@ -1,13 +1,14 @@
 import 'dart:math';
 
-import 'package:certificate_q/common/data/model/english_word.dart';
 import 'package:certificate_q/common/data/model/word/word.dart';
-import 'package:certificate_q/common/data/sample_word.dart';
-import 'package:certificate_q/common/database/drift_database.dart';
+import 'package:certificate_q/common/const/sample_word.dart';
+
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-import 'model/word/japanese_word.dart';
+import '../database/drift_database.dart';
+import '../model/word/type/eng/english_word.dart';
+import '../model/word/type/jp/japanese_word.dart';
 
 void insertSampleWordsIntoDB(LocalDatabase db) async {
   for (var sampleJPWordFile in sampleJPWordFiles) {
@@ -56,14 +57,14 @@ Future<List<JapaneseWord>> readJapaneseWordCSV({
     List<String> meanings =
         (row[2] as String).split(',').map((meaning) => meaning.trim()).toList();
 
-    JapaneseWord japaneseWord = JapaneseWord(
-      spelling: kanji,
-      pronunciation: yomikata,
-      meanings: meanings,
-      theme: theme,
-    );
+    // JapaneseWord japaneseWord = JapaneseWord(
+    //   spelling: kanji,
+    //   pronunciation: yomikata,
+    //   meanings: meanings,
+    //   theme: theme,
+    // );
 
-    japaneseWords.add(japaneseWord);
+    // japaneseWords.add(japaneseWord);
   }
 
   return japaneseWords;
@@ -88,14 +89,14 @@ Future<List<EnglishWord>> readEnglishWordCSV({
     List<String> meanings =
         (row[2] as String).split(',').map((meaning) => meaning.trim()).toList();
 
-    EnglishWord englishWord = EnglishWord(
-      spelling: spelling,
-      pronunciation: pronunciation,
-      meanings: meanings,
-      theme: theme,
-    );
+    // EnglishWord englishWord = EnglishWord(
+    //   spelling: spelling,
+    //   pronunciation: pronunciation,
+    //   meanings: meanings,
+    //   theme: theme,
+    // );
 
-    englishWords.add(englishWord);
+    // englishWords.add(englishWord);
   }
 
   return englishWords;
