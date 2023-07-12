@@ -67,6 +67,9 @@
 
    <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Download%20Page.gif">
 
+- 단어 설치하기
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Download%20Page.gif">
 
 ### 2-5. 마이 페이지
 
@@ -82,4 +85,4 @@
 - [2023 7 10 회고 보러가기](https://github.com/092600/Voca_App/blob/master/%ED%9A%8C%EA%B3%A0/2023_07_10_%ED%9A%8C%EA%B3%A0.md)
 
 
-- [2023 7 12 회고 보러가기](https://github.com/092600/Voca_App/blob/master/%ED%9A%8C%EA%B3%A0/2023_07_10_%ED%9A%8C%EA%B3%A0.md)
+- [2023 7 12 회고 보러가기](https://github.com/092600/Voca_App/blob/master/%ED%9A%8C%EA%B3%A0/2023_07_12_%ED%9A%8C%EA%B3%A0.md)
