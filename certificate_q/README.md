@@ -67,9 +67,9 @@
 
    <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Download%20Page.gif">
 
-- 단어 설치하기
+- 단어 설치하기 (2023/07/13 추가)
 
-  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Download%20Page.gif">
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/단어 설치하기.gif">
 
 ### 2-5. 마이 페이지
 
