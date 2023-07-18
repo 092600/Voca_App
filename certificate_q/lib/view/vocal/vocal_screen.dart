@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../common/component/custom_app_bar.dart';
 
-import '../../common/const/default.dart';
+import '../../common/const/app_colors.dart';
 import 'component/vocal_select_card.dart';
 
 class VocalScreen extends StatelessWidget {

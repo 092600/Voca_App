@@ -84,34 +84,30 @@ class VocalSelectCard extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                child: Text(
-                                  title,
-                                  style: GoogleFonts.bebasNeue(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
+                              Text(
+                                title,
+                                style: GoogleFonts.bebasNeue(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              Container(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "최근 정답률 : ",
-                                      style: GoogleFonts.bebasNeue(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "최근 정답률 : ",
+                                    style: GoogleFonts.bebasNeue(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
                                     ),
-                                    Text(
-                                      "53 %",
-                                      style: GoogleFonts.bebasNeue(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                  ),
+                                  Text(
+                                    "53 %",
+                                    style: GoogleFonts.bebasNeue(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -137,9 +133,7 @@ class VocalSelectCard extends StatelessWidget {
               ),
             );
           } else {
-            return Container(
-              child: const Text("데이터를 가져오는 도중 문제가 발생하였습니다.\n다시 시도해주세요."),
-            );
+            return const Text("데이터를 가져오는 도중 문제가 발생하였습니다.\n다시 시도해주세요.");
           }
         },
       ),

@@ -1,7 +1,7 @@
 import 'package:certificate_q/common/component/custom_app_bar.dart';
-import 'package:certificate_q/common/const/default.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common/const/app_colors.dart';
 import '../component/exam_select_card.dart';
 
 class ExamScreen extends StatelessWidget {

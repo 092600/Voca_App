@@ -1,4 +1,3 @@
-import 'package:certificate_q/common/const/default.dart';
 import 'package:certificate_q/view/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,6 +6,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../common/component/custom_app_bar.dart';
+import '../../common/const/app_colors.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});

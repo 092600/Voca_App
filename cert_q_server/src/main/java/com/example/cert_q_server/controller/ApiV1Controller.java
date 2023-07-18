@@ -22,17 +22,17 @@ public class ApiV1Controller {
     private final WordService wordService;
     
     @GetMapping("/words")
-    public List<WordDto> getWords(@RequestParam("type") String type) {
+    public List<WordDto> getWords(
+            @RequestParam("type") String type
+    ) {
         return wordService.getWordDtosByLanguageType(type);
     }
 
     @GetMapping("/theme")
-    public Map<String, List<WordDtoWithoutTheme>> getWordsGroupByTheme(@RequestParam("type") String type) {
+    public Map<String, List<WordDtoWithoutTheme>> getWordsGroupByTheme(
+            @RequestParam("type") String type
+    ) {
         return wordService.getWordDtosByLanguageTypeGroupByTheme(type);
     }
 
-    @GetMapping()
-    public ResponseEntity<String> sayHello() {
-        return ResponseEntity.ok("Hello from secured endpoint");
-    }
 }

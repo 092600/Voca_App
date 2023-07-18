@@ -1,9 +1,12 @@
-import 'package:certificate_q/common/const/default.dart';
-import 'package:certificate_q/layout/home_layout.dart';
+import 'package:certificate_q/common/data/model/account/account.dart';
+import 'package:certificate_q/common/data/service/login_client.dart';
 import 'package:certificate_q/view/signup/signup_screen.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../common/const/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,6 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
 
+  final dio = Dio();
+  late final loginClient;
+
   String email = '';
   String password = '';
 
@@ -26,6 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
     emailController = TextEditingController();
     passwordController = TextEditingController();
+
+    // LoginClient 초기화
+    loginClient = LoginClient(dio);
   }
 
   @override
@@ -90,17 +99,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (_formKey.currentState!.validate()) {
                         email = emailController.text;
                         password = passwordController.text;
+                        var account = Account(email: email, password: password);
+                        await loginClient.login(account);
 
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeLayout()),
-                          (route) => route == "/login",
-                        );
+                        // Navigator.pushAndRemoveUntil(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const HomeLayout()),
+                        //   (route) => route == "/login",
+                        // );
                       }
                     },
                     child: Container(

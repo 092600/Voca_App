@@ -1,4 +1,3 @@
-import 'package:certificate_q/common/data/model/word/word_meaning.dart';
 import 'package:certificate_q/view/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -19,10 +18,6 @@ void main() async {
 
   const storage = FlutterSecureStorage();
   final db = LocalDatabase();
-
-  List<WordMeaning> test = await db.findAllWordMeanings();
-
-  db.delWords2();
 
   runApp(
     MultiProvider(

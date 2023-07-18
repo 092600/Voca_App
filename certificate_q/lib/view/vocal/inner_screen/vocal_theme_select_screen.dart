@@ -1,8 +1,8 @@
 import 'package:certificate_q/common/component/custom_app_bar.dart';
-import 'package:certificate_q/common/const/default.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common/const/app_colors.dart';
 import '../../../common/data/model/word/type/language_type.dart';
 import '../../../common/providers/local_database_provider.dart';
 import '../component/vocal_select_card.dart';

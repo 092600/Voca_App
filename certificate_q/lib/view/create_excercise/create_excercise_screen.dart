@@ -6,10 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../common/const/default.dart';
+import '../../common/const/app_colors.dart';
 import '../../common/data/model/word/word.dart';
 import '../../common/providers/local_database_provider.dart';
-import '../../common/repository/word_repository.dart';
+import '../../common/data/repository/word_repository.dart';
 import 'component/exam_bank_card.dart';
 
 class CreateExcerciseScreen extends StatefulWidget {

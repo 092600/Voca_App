@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../common/component/custom_app_bar.dart';
-import '../../../../../common/const/default.dart';
+import '../../../../../common/const/app_colors.dart';
 import '../../../../../common/data/model/word/word.dart';
 import '../../../../../common/data/utils/managing_datas.dart';
 import '../../../../../common/data/model/word/type/language_type.dart';

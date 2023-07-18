@@ -1,9 +1,9 @@
-import 'package:certificate_q/common/const/default.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../common/component/custom_app_bar.dart';
 import '../../common/component/my_circular_progress_indicator.dart';
+import '../../common/const/app_colors.dart';
 import 'component/custom_study_task_widget.dart';
 import 'component/my_study_history_widget.dart';
 

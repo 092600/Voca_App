@@ -58,6 +58,11 @@
 
   <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Home%20Page.gif">
 
+#### 2-3-1. 목표 달성률 보여주기 (2023/07/17 추가)
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Home%20Page.gif">
+
+메인 페이지에서 목표 달성률을 확인할 수 있습니다. 목표는 마이 페이지에서 별도로 설정할 수 있으며 금일 ~ -5일까지의 목표달성률을 확인할 수 있습니다.
 
 ### 2-4. 다운로드 페이지
 
@@ -78,6 +83,14 @@
 - 마이 페이지
 
   <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/My%20Page.gif">
+
+  유저 이메일과 이름을 로그인 당시 Json Web Token 에서 값을 가져와 FlutterSecureStorage 를 사용해 저장하고 사용자가 MyPage 에 들어올 경우, 값을 읽어와 화면에 보여줍니다.
+
+#### 2-5-1. 목표 설정하기 (2023/07/17 추가)
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/My%20Page.gif">
+
+
 
 
 ## 3. 회고

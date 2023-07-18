@@ -50,7 +50,7 @@ public class AuthenticationService {
 
         userService.save(user);
 
-        UserDetails userDetails = new CustomUserDetails(user);
+        CustomUserDetails userDetails = new CustomUserDetails(user);
 
         var jwtToken = jwtService.generateToken(userDetails);
         var refreshToken = jwtService.generateRefreshToken(userDetails);
@@ -91,7 +91,6 @@ public class AuthenticationService {
         var token = Token.builder()
                 .user(user)
                 .token(jwtToken)
-                .tokenType(TokenType.BEARER)
                 .expired(false)
                 .revoked(false)
                 .build();

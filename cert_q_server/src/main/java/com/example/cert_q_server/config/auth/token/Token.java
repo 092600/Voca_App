@@ -4,11 +4,10 @@ import com.example.cert_q_server.domain.user.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.ConnectionBuilder;
 
 @Getter
-@Setter
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Token {
@@ -31,4 +30,20 @@ public class Token {
     @JoinColumn(name = "user_id")
     public User user;
 
+    @Builder
+    public Token(Long id, String token, boolean revoked, boolean expired, User user) {
+        this.id = id;
+        this.token = token;
+        this.revoked = revoked;
+        this.expired = expired;
+        this.user = user;
+    }
+
+    public void setExpired(boolean bool) {
+        this.revoked = bool;
+    }
+
+    public void setRevoked(boolean bool) {
+        this.revoked = bool;
+    }
 }

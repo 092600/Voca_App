@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import java.security.Key;
 
+import com.example.cert_q_server.domain.user.user_details.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 
 import io.jsonwebtoken.Claims;
@@ -48,8 +49,16 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(CustomUserDetails userDetails) {
+        Map<String, Object> claims = setExtraClaims(userDetails);
+        return generateToken(claims, userDetails);
+    }
+
+    Map<String, Object> setExtraClaims(CustomUserDetails userDetails) {
+        Map<String, Object> claims = new HashMap<String, Object>();
+        claims.put("username", userDetails.getUser().getFullUserName());
+
+        return claims;
     }
 
     public String generateToken(

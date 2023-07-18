@@ -1,7 +1,7 @@
-import 'package:certificate_q/common/const/default.dart';
 import 'package:certificate_q/view/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../common/const/app_colors.dart';
 import '../view/create_excercise/create_excercise_screen.dart';
 import '../view/home/home_screen.dart';
 import '../view/vocal/vocal_screen.dart';
@@ -24,7 +24,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       // ExcerciseScreen(),
       const VocalScreen(),
       const HomeScreen(),
-      CreateExcerciseScreen(),
+      const CreateExcerciseScreen(),
       ProfileScreen(),
     ];
   }
