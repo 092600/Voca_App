@@ -60,7 +60,9 @@
 
 #### 2-3-1. 목표 달성률 보여주기 (2023/07/17 추가)
 
-  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Home%20Page.gif">
+- 목표 달성률 보여주기
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%AA%A9%ED%91%9C%20%EB%8B%AC%EC%84%B1%EB%A5%A0%20%ED%99%95%EC%9D%B8%ED%95%98%EA%B8%B0.gif">
 
 메인 페이지에서 목표 달성률을 확인할 수 있습니다. 목표는 마이 페이지에서 별도로 설정할 수 있으며 금일 ~ -5일까지의 목표달성률을 확인할 수 있습니다.
 
@@ -88,7 +90,9 @@
 
 #### 2-5-1. 목표 설정하기 (2023/07/17 추가)
 
-  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/My%20Page.gif">
+- 목표 설정하기
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%B3%B4%EC%B9%B4%20%EB%AA%A9%ED%91%9C%20%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0.gif">
 
 
 
