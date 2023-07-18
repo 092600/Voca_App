@@ -72,9 +72,17 @@
 
    <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/Download%20Page.gif">
 
+- 단어 미리보기 (2023/7/16 추가)
+
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/단어 설치하기.gif">
+
+단어장 테마 별로 다운로드 전, 클릭하여 단어장 별 단어를 미리 볼 수 있습니다.
+
 - 단어 설치하기 (2023/07/13 추가)
 
   <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/단어 설치하기.gif">
+
+단어를 서버로부터 설치하게되면 Drift를 통해 핸드폰 내의 데이터베이스에 저장하고 단어 공부 시 핸드폰 내의 데이터베이스에서 단어를 조회하여 사용합니다.
 
 ### 2-5. 마이 페이지
 
