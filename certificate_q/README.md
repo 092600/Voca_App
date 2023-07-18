@@ -76,7 +76,7 @@
 
 - 단어 미리보기 (2023/7/16 추가)
 
-  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/단어 설치하기.gif">
+  <image src="https://github.com/092600/Voca_App/blob/master/%EC%9D%B4%EB%AF%B8%EC%A7%80/%EB%8B%A8%EC%96%B4%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%EC%A0%84%20%EB%AF%B8%EB%A6%AC%EB%B3%B4%EA%B8%B0.gif">
 
 단어장 테마 별로 다운로드 전, 클릭하여 단어장 별 단어를 미리 볼 수 있습니다.
 
