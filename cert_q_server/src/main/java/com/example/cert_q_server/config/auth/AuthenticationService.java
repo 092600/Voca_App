@@ -34,6 +34,10 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+
+    public Boolean duplicateEmail(String email) {
+        return userRepo.existsByEmail(email);
+    }
     public AuthenticationResponse register (
             RegisterRequest request
     ) {

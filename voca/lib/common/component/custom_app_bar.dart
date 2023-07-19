@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../view/login/login_screen.dart';
+import '../../view/account/login/login_screen.dart';
 import '../const/app_colors.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget {
     super.key,
     this.expandedHeight,
     this.appBarBody,
+    this.useSettingsIcon = false,
     String? title,
   }) : title = title ?? "Exam Excercise";
 
@@ -16,6 +17,7 @@ class CustomAppBar extends StatelessWidget {
   final double? expandedHeight;
 
   final String title;
+  final bool useSettingsIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -26,58 +28,58 @@ class CustomAppBar extends StatelessWidget {
         const SizedBox(
           width: 10,
         ),
-        InkWell(
-          onTap: () {
-            showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(25.0),
-                  ),
-                ),
-                builder: (context) {
-                  return SizedBox(
-                    height: 200,
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 25),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            SettingBottomSheetButton(
-                              content: "로그아웃",
-                              onTap: () {
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const LoginScreen()),
-                                  (route) => route == "/home",
-                                );
-                              },
-                            ),
-                            SettingBottomSheetButton(
-                              content: "고객지원",
-                              onTap: () {
-                                print("고객지원");
-                              },
-                            ),
-                          ],
+        useSettingsIcon == false
+            ? InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      context: context,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(25.0),
                         ),
                       ),
-                    ),
-                  );
-                });
-
-            print("Tapped");
-          },
-          child: const Icon(
-            Icons.more_horiz,
-            size: 30,
-            color: Colors.white,
-          ),
-        ),
+                      builder: (context) {
+                        return SizedBox(
+                          height: 200,
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 25),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  SettingBottomSheetButton(
+                                    content: "로그아웃",
+                                    onTap: () {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const LoginScreen()),
+                                        (route) => route == "/home",
+                                      );
+                                    },
+                                  ),
+                                  SettingBottomSheetButton(
+                                    content: "고객지원",
+                                    onTap: () {
+                                      print("고객지원");
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      });
+                },
+                child: const Icon(
+                  Icons.more_horiz,
+                  size: 30,
+                  color: Colors.white,
+                ),
+              )
+            : Container(),
         const SizedBox(
           width: 10,
         ),
