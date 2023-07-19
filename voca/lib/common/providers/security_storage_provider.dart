@@ -132,6 +132,7 @@ class SecurityStorageProvider extends ChangeNotifier {
     String? email = await getUserEmail();
     String? username = await getUsername();
 
-    return Account(email: email!, username: username!, password: "");
+    return Account(
+        email: email!, firstName: username!, lastName: username, password: "");
   }
 }

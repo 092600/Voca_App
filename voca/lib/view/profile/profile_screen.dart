@@ -35,9 +35,9 @@ class ProfileScreen extends StatelessWidget {
 
                   return Container(
                     margin: const EdgeInsets.only(
-                      // top: 30,
-                      top: 20,
-                      bottom: 10,
+                      top: 40,
+                      // top: 20,
+                      bottom: 15,
                       left: 10,
                       right: 10,
                     ),
@@ -49,27 +49,26 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    height: 170,
                     child: Column(
                       children: [
                         UserProfileRow(
-                          userId: account.username,
+                          userId: account.firstName,
                           userEmail: account.email,
                         ),
                         const SizedBox(
-                          height: 18,
+                          height: 30,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            MyPageButtom(
-                              content: "슬롯 추가하기",
-                            ),
-                            MyPageButtom(
-                              content: "슬롯 설정하기",
-                            ),
-                          ],
-                        )
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        //   children: [
+                        //     MyPageButtom(
+                        //       content: "슬롯 추가하기",
+                        //     ),
+                        //     MyPageButtom(
+                        //       content: "슬롯 설정하기",
+                        //     ),
+                        //   ],
+                        // )
                       ],
                     ),
                   );

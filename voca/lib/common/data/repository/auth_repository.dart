@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:voca/common/const/default.dart';
 
 import '../../const/api_uris.dart';
+import '../model/account/account.dart';
 import '../utils/app_initializer.dart';
 
 class AuthRepository {
@@ -43,5 +44,43 @@ class AuthRepository {
     } catch (e) {
       return false;
     }
+  }
+
+  static Future<bool> dupulicateEmail({
+    required String email,
+  }) async {
+    Dio dio = Dio();
+
+    try {
+      final response = await dio.get(
+        DUPULICATE_EMAIL,
+        queryParameters: {
+          "email": email,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        print("200 : ${response.data}");
+        return response.data;
+      }
+    } catch (e) {
+      print(e);
+    }
+
+    return false;
+  }
+
+  static Future<void> registerAccount(Account account) async {
+    Dio dio = Dio();
+
+    print(
+        "${account.email}, ${account.firstName}, ${account.lastName}, ${account.password}");
+    // try {
+    //   final response = dio.post(
+    //     REGISTER_API_URI,
+    //   );
+    // } catch (e) {
+    //   print(e);
+    // }
   }
 }
