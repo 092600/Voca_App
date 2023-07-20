@@ -1,4 +1,4 @@
-package com.example.cert_q_server.config.auth;
+package com.example.cert_q_server.config.account;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,13 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse {
+public class AccountPrepareResponse {
 
-    @JsonProperty("access_token")
-    private String accessToken;
-
-    @JsonProperty("refresh_token")
-    private String refreshToken;
-
+    @JsonProperty("prepared")
+    private boolean prepared;
 }
-

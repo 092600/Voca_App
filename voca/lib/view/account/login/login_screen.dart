@@ -2,6 +2,9 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:voca/common/data/model/account/account.dart';
+import 'package:voca/common/data/model/account/account_status.dart';
+import 'package:voca/view/account/signup/set_user_info_screen.dart';
 
 import '../../../common/const/app_colors.dart';
 import '../../../common/data/repository/auth_repository.dart';
@@ -99,16 +102,27 @@ class _LoginScreenState extends State<LoginScreen> {
                         email = emailController.text;
                         password = passwordController.text;
 
-                        final response = await AuthRepository.login(
+                        final Account account = await AuthRepository.login(
                           email: email,
                           password: password,
                         );
 
-                        if (response) {
+                        if (account.status == AccountStatus.ACTIVE) {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HomeLayout()),
+                                builder: (_) => const HomeLayout()),
+                            (route) => route == "/login",
+                          );
+                        } else if (account.status ==
+                            AccountStatus.NEED_PREPARE) {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => SetUserInfoScreen(
+                                account: account,
+                              ),
+                            ),
                             (route) => route == "/login",
                           );
                         } else {

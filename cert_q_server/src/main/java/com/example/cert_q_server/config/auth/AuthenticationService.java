@@ -1,5 +1,8 @@
 package com.example.cert_q_server.config.auth;
 
+import com.example.cert_q_server.config.account.AccountPrepareRequest;
+import com.example.cert_q_server.config.account.AccountPrepareResponse;
+import com.example.cert_q_server.config.account.AccountRegistrationResponse;
 import com.example.cert_q_server.config.auth.token.JwtService;
 import com.example.cert_q_server.config.auth.token.Token;
 import com.example.cert_q_server.config.auth.token.TokenRepo;
@@ -10,7 +13,9 @@ import com.example.cert_q_server.domain.user.UserServiceImpl;
 import com.example.cert_q_server.domain.user.UserStatus;
 import com.example.cert_q_server.domain.user.role.Role;
 import com.example.cert_q_server.domain.user.user_details.CustomUserDetails;
+import com.example.cert_q_server.domain.word.type.LanguageType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,33 +43,47 @@ public class AuthenticationService {
     public Boolean duplicateEmail(String email) {
         return userRepo.existsByEmail(email);
     }
-    public AuthenticationResponse register (
+
+    public AccountPrepareResponse prepare(
+            @NotNull AccountPrepareRequest request
+    ) {
+        try {
+            userService.prepare(request);
+            return new AccountPrepareResponse(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new AccountPrepareResponse(false);
+    }
+
+    public AccountRegistrationResponse register (
             RegisterRequest request
     ) {
-        userService.existsByEmail(request.getEmail());
 
-        var user = User.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
-                .status(UserStatus.ACTIVE)
-                .build();
+        try {
+            userService.existsByEmail(request.getEmail());
 
-        userService.save(user);
+            var user = User.builder()
+                    .firstname(request.getFirstName())
+                    .lastname(request.getLastName())
+                    .email(request.getEmail())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .role(Role.USER)
+                    .status(UserStatus.NEED_PREPARE)
+                    .build();
 
-        CustomUserDetails userDetails = new CustomUserDetails(user);
+            userService.save(user);
 
-        var jwtToken = jwtService.generateToken(userDetails);
-        var refreshToken = jwtService.generateRefreshToken(userDetails);
+            return AccountRegistrationResponse.builder()
+                    .created(true)
+                    .build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        revokeAllUserTokens(user);
-        saveUserToken(user, jwtToken);
-
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
+        return AccountRegistrationResponse.builder()
+                .created(false)
                 .build();
     }
 

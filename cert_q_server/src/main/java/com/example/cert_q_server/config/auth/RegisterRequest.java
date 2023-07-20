@@ -1,19 +1,17 @@
 package com.example.cert_q_server.config.auth;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterRequest {
 
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
 
     private String email;
     private String password;

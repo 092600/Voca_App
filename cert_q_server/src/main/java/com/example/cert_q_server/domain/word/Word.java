@@ -3,6 +3,7 @@ package com.example.cert_q_server.domain.word;
 import javax.persistence.*;
 
 import com.example.cert_q_server.domain.word.meaning.WordMeaning;
+import com.example.cert_q_server.domain.word.type.LanguageType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,8 +34,9 @@ public abstract class Word {
     @Column(nullable = true)
     private String pronunciation;
 
-    @Column(name="languageType", insertable = false, updatable = false)
-    protected String languageType;
+    @Enumerated(EnumType.STRING) // enum으로 변경
+    @Column(name = "languageType", insertable = false, updatable = false)
+    protected LanguageType languageType; // enum 타입으로 변경
 
     @JsonManagedReference
     @OneToMany(mappedBy = "word", fetch = FetchType.LAZY)

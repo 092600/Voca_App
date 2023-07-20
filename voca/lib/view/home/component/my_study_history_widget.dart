@@ -50,13 +50,13 @@ class MyStudyHistoryWidget extends StatelessWidget {
                           ...goals.map(
                             (goal) => Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 5),
+                                  const EdgeInsets.symmetric(horizontal: 3),
                               child: Stack(
                                 children: [
                                   SizedBox(
-                                    // color: Colors.white,
-                                    height: 70,
-                                    width: 70,
+                                    // color: Colors.amber,
+                                    height: 65,
+                                    width: 65,
                                     child: Padding(
                                       padding: const EdgeInsets.only(left: 3),
                                       child: Text(
@@ -68,27 +68,9 @@ class MyStudyHistoryWidget extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  // int.parse(goal.correctCnt) /
-                                  //             int.parse(goal.todaysGoal) !=
-                                  //         0
-                                  //     ?
-                                  //     : SizedBox(
-                                  //         width: 70,
-                                  //         height: 70,
-                                  //         child: Center(
-                                  //           child: Container(
-                                  //             width: 40,
-                                  //             height: 40,
-                                  //             decoration: BoxDecoration(
-                                  //               shape: BoxShape.circle,
-                                  //               color: primaryColor,
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //       ),
                                   SizedBox(
-                                    width: 70,
-                                    height: 70,
+                                    width: 65,
+                                    height: 65,
                                     child: Center(
                                       child: CircularProgressIndicator(
                                         value: int.parse(goal.correctCnt) /

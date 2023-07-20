@@ -1,4 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:voca/common/data/model/word/type/language_type.dart';
+
+import 'account_status.dart';
 
 part 'account.g.dart';
 
@@ -7,16 +10,32 @@ class Account {
   final String email;
   final String firstName;
   final String lastName;
-  // final String username;
+  final AccountStatus status;
   final String password;
+  List<LanguageType> languagies;
 
   Account({
     required this.email,
     required this.firstName,
     required this.lastName,
-    // required this.username,
+    required this.status,
     required this.password,
-  });
+    List<LanguageType>? languagies,
+  }) : languagies = languagies ?? [];
+
+  static Account getStatusNoneAccount() {
+    return Account(
+      email: "",
+      firstName: "",
+      lastName: "",
+      status: AccountStatus.NONE,
+      password: "",
+    );
+  }
+
+  String getFullName() {
+    return "$firstName $lastName";
+  }
 
   static bool isEmailValid(String value) {
     // 이메일 형식을 검증하는 정규식

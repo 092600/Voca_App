@@ -52,23 +52,11 @@ class ProfileScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         UserProfileRow(
-                          userId: account.firstName,
-                          userEmail: account.email,
+                          account: account,
                         ),
                         const SizedBox(
                           height: 30,
                         ),
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //   children: [
-                        //     MyPageButtom(
-                        //       content: "슬롯 추가하기",
-                        //     ),
-                        //     MyPageButtom(
-                        //       content: "슬롯 설정하기",
-                        //     ),
-                        //   ],
-                        // )
                       ],
                     ),
                   );
@@ -166,17 +154,6 @@ class ProfileScreen extends StatelessWidget {
               },
             ),
           ),
-
-          // SliverList(
-          //     tmp
-          //         .map(
-          //           (content) => MyPageFunctionalButton(
-          //             content: content,
-          //           ),
-          //         )
-          //         .toList(),
-          //   ),
-          // ),
         ],
       ),
     );
@@ -226,12 +203,10 @@ class MyPageFunctionalButton extends StatelessWidget {
 }
 
 class UserProfileRow extends StatelessWidget {
-  final String userEmail;
-  final String userId;
+  final Account account;
 
   const UserProfileRow({
-    required this.userEmail,
-    required this.userId,
+    required this.account,
     super.key,
   });
 
@@ -256,16 +231,56 @@ class UserProfileRow extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              userId,
+              account.getFullName(),
               style: Theme.of(context).textTheme.displayMedium,
             ),
             Text(
-              userEmail,
+              account.email,
               style: Theme.of(context).textTheme.displaySmall,
             ),
+            Row(
+              children: [
+                ...account.languagies
+                    .map((language) => LanguageContainer(
+                          language: language.name,
+                        ))
+                    .toList(),
+              ],
+            )
           ],
         )
       ],
+    );
+  }
+}
+
+class LanguageContainer extends StatelessWidget {
+  const LanguageContainer({
+    super.key,
+    required this.language,
+  });
+
+  final String language;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 42,
+      height: 24,
+      decoration: BoxDecoration(
+        color: primaryColor!.withOpacity(0.7),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      margin: const EdgeInsets.only(top: 3, right: 5),
+      child: Center(
+        child: Text(
+          language,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
     );
   }
 }

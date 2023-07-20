@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:voca/common/data/model/account/account_status.dart';
 import 'package:voca/common/data/repository/auth_repository.dart';
+import 'package:voca/view/account/signup/set_user_info_screen.dart';
 
 import '../../../common/component/custom_app_bar.dart';
 import '../../../common/const/app_colors.dart';
@@ -217,7 +219,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                       CustomConfirmButton(
                         content: "Next",
-                        onTap: () {
+                        onTap: () async {
                           if (isAvailableFirstName &&
                               isAvailableLastName &&
                               isConfirmedEmail &&
@@ -227,20 +229,30 @@ class _SignupScreenState extends State<SignupScreen> {
                               email: email,
                               firstName: firstName,
                               lastName: lastName,
-                              // username: "$firstName $lastName",
                               password: password,
+                              status: AccountStatus.NONE,
+                              languagies: [],
                             );
 
-                            print(
-                                "${account.email}, $firstName, $lastName, ${account.password}");
+                            final response =
+                                await AuthRepository.registerAccount(account);
 
-                            AuthRepository.registerAccount(account);
-                            // Navigator.pushAndRemoveUntil(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //       builder: (context) => SetUserInfoScreen()),
-                            //   (route) => route == "/user/register",
-                            // );
+                            if (response) {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SetUserInfoScreen(
+                                    account: account,
+                                  ),
+                                ),
+                                (route) => route == "/user/register",
+                              );
+                            } else {
+                              renderSnackBar(
+                                alertMessage:
+                                    "회원가입 도중 문제가 발생했습니다.\n다시 한번 시도해주세요.",
+                              );
+                            }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
@@ -265,6 +277,17 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
+  }
+
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> renderSnackBar({
+    required String alertMessage,
+  }) {
+    return ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Center(
+        child: Text(alertMessage),
+      ),
+      duration: const Duration(seconds: 1), //올라와있는 시간
+    ));
   }
 
   Container renderSignupSubText(

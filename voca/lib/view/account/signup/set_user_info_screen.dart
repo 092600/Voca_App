@@ -6,28 +6,30 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:voca/common/const/app_colors.dart';
 import 'package:voca/common/data/model/word/type/language_type.dart';
+import 'package:voca/common/data/repository/auth_repository.dart';
 
 import '../../../common/component/custom_app_bar.dart';
 import '../../../common/data/model/account/account.dart';
+import '../login/login_screen.dart';
 import 'component/signup_button.dart';
 
 class SetUserInfoScreen extends StatefulWidget {
-  const SetUserInfoScreen({super.key});
+  const SetUserInfoScreen({
+    super.key,
+    required this.account,
+  });
+
+  final Account account;
 
   @override
   State<SetUserInfoScreen> createState() => _SetUserInfoScreenState();
 }
 
 class _SetUserInfoScreenState extends State<SetUserInfoScreen> {
-  Account account = Account(
-    email: "tyiju@naver.com",
-    firstName: "sim",
-    lastName: "junghun",
-    password: "",
-  );
-
   List<LanguageType> selectedLanguagies = [];
 
   File? _image;
@@ -225,8 +227,30 @@ class _SetUserInfoScreenState extends State<SetUserInfoScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: CustomConfirmButton(
                 content: "회원가입 완료하기",
-                onTap: () {
-                  print("OK");
+                onTap: () async {
+                  final bool result = await AuthRepository.prepareAccount(
+                    account: widget.account,
+                    image: _image,
+                    selectedLanguagies: selectedLanguagies,
+                  );
+
+                  if (result) {
+                    showTopSnackBar(
+                      Overlay.of(context),
+                      CustomSnackBar.success(
+                        message: "회원가입이 완료되었습니다.",
+                        backgroundColor: appBarBackgroundColor!,
+                      ),
+                    );
+
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                      (route) => route == "/login",
+                    );
+                  }
                 },
               ),
             ),

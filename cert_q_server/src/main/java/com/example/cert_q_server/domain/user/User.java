@@ -4,13 +4,14 @@ import com.example.cert_q_server.config.auth.token.Token;
 import com.example.cert_q_server.domain.common.BaseTimeEntity;
 import com.example.cert_q_server.domain.common.UserTimeEntity;
 import com.example.cert_q_server.domain.user.role.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.example.cert_q_server.domain.word.type.LanguageType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,8 +28,12 @@ public class User extends UserTimeEntity {
     private String firstname;
     private String lastname;
 
+    @Column(nullable = false, length = 50)
     private String email;
+    @Column(nullable = false)
     private String password;
+
+    private String profilePath;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -36,11 +41,20 @@ public class User extends UserTimeEntity {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
+    @ElementCollection
+    @Enumerated(EnumType.STRING)
+    List<LanguageType> languagies;
+
     @OneToMany(mappedBy = "user")
     private List<Token> tokens;
 
     public String getFullUserName() {
         return firstname + " " + lastname;
+    }
+
+    public void prepare() {
+        status = UserStatus.ACTIVE;
+        profilePath = "/Users/sim/Documents/GitHub/Voca_App/image/profile/"+id+"/profile.jpg";
     }
 
 }

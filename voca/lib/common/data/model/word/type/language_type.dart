@@ -40,3 +40,14 @@ String getFullName(String value) {
       throw ArgumentError('Invalid value: $value');
   }
 }
+
+List<LanguageType> mapStringToLanguageType(List<String> languagesToJson) {
+  List<LanguageType> result = [];
+
+  for (String language in languagesToJson) {
+    // 문자열을 LanguageType 값으로 변환하여 리스트에 추가합니다.
+    result.add(getLanguageTypeFromString(language));
+  }
+
+  return result;
+}

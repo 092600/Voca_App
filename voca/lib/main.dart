@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:voca/view/account/signup/set_user_info_screen.dart';
 import 'package:voca/view/account/signup/signup_screen.dart';
 
 import 'common/data/database/drift_database.dart';
@@ -62,7 +61,7 @@ class CertificateQApp extends StatelessWidget {
         routes: {
           "/login": (_) => const LoginScreen(),
           "/user/register": (_) => const SignupScreen(),
-          "/user/profile": (_) => SetUserInfoScreen(),
+          // "/user/profile": (_) => SetUserInfoScreen(),
           "/home": (_) => const HomeLayout(),
         });
   }

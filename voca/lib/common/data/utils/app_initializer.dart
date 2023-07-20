@@ -1,15 +1,20 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:voca/common/const/default.dart';
+
+import '../model/account/account.dart';
 
 class AppInitializer {
   final FlutterSecureStorage storage = const FlutterSecureStorage();
 
   Future<void> appSetUp({
-    required String accessToken,
+    required Account account,
+    required languagiesToJson,
   }) async {
     setDefaultVocaGoal();
-    setUser(accessToken: accessToken);
+    setUser(
+      account: account,
+      languagiesToJson: languagiesToJson,
+    );
   }
 
   Future<void> setDefaultVocaGoal() async {
@@ -17,11 +22,12 @@ class AppInitializer {
   }
 
   setUser({
-    required String accessToken,
+    required Account account,
+    required String languagiesToJson,
   }) async {
-    Map<String, dynamic> Jwt = JwtDecoder.decode(accessToken);
-
-    await storage.write(key: STORAGE_USER_NAME, value: Jwt["username"]);
-    await storage.write(key: STORAGE_USER_EMAIL, value: Jwt["sub"]);
+    await storage.write(key: STORAGE_USER_FIRST_NAME, value: account.firstName);
+    await storage.write(key: STORAGE_USER_LAST_NAME, value: account.lastName);
+    await storage.write(key: STORAGE_USER_EMAIL, value: account.email);
+    await storage.write(key: STORAGE_USER_LANGUAGIES, value: languagiesToJson);
   }
 }

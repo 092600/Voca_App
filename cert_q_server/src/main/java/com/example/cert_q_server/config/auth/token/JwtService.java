@@ -1,12 +1,16 @@
 package com.example.cert_q_server.config.auth.token;
 
 
+import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 
 import java.security.Key;
 
+import com.example.cert_q_server.domain.user.User;
 import com.example.cert_q_server.domain.user.user_details.CustomUserDetails;
+import com.example.cert_q_server.domain.word.type.LanguageType;
+import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 
 import io.jsonwebtoken.Claims;
@@ -49,14 +53,24 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(CustomUserDetails userDetails) {
+    public String generateToken(CustomUserDetails userDetails)  {
         Map<String, Object> claims = setExtraClaims(userDetails);
         return generateToken(claims, userDetails);
     }
 
     Map<String, Object> setExtraClaims(CustomUserDetails userDetails) {
         Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put("username", userDetails.getUser().getFullUserName());
+        User user = userDetails.getUser();
+
+        System.out.println("new Gson().toJson(user.getLanguagies()) = " + new Gson().toJson(user.getLanguagies()));
+
+        claims.put("firstName", user.getFirstname());
+        claims.put("lastName", user.getLastname());
+        claims.put("status", user.getStatus().name());
+        claims.put("languagies", new Gson().toJson(user.getLanguagies()));
+
+        System.out.println("claims = " + claims);
+
 
         return claims;
     }

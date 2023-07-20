@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:voca/common/const/default.dart';
 import 'package:voca/common/data/model/account/account.dart';
+import 'package:voca/common/data/model/account/account_status.dart';
+import 'package:voca/common/data/model/word/type/language_type.dart';
 
 import '../data/model/goal/goal.dart';
 
@@ -120,19 +124,49 @@ class SecurityStorageProvider extends ChangeNotifier {
     await storage.write(key: USER_GOAL, value: goal);
   }
 
-  Future<String?> getUsername() async {
-    return await storage.read(key: STORAGE_USER_NAME);
+  Future<String?> getUserFirstName() async {
+    String? firstName = await storage.read(key: STORAGE_USER_FIRST_NAME);
+
+    return firstName;
+  }
+
+  Future<String?> getUserLastName() async {
+    String? lastName = await storage.read(key: STORAGE_USER_LAST_NAME);
+
+    return lastName;
   }
 
   Future<String?> getUserEmail() async {
     return await storage.read(key: STORAGE_USER_EMAIL);
   }
 
+  Future<List<LanguageType>> getLanguagies() async {
+    String? languagiesToJson = await storage.read(key: STORAGE_USER_LANGUAGIES);
+
+    List<LanguageType> languagies;
+    if (languagiesToJson != null) {
+      languagies =
+          mapStringToLanguageType(json.decode(languagiesToJson).cast<String>());
+    } else {
+      languagies = [];
+    }
+
+    return languagies;
+  }
+
   Future<Account> getAccount() async {
     String? email = await getUserEmail();
-    String? username = await getUsername();
+    String? firstName = await getUserFirstName();
+    String? lastName = await getUserLastName();
+    List<LanguageType> languagies = await getLanguagies();
 
     return Account(
-        email: email!, firstName: username!, lastName: username, password: "");
+      email: email!,
+      firstName: firstName!,
+      lastName: lastName!,
+      password: "",
+      status: AccountStatus.ACTIVE,
+      languagies: languagies,
+    );
   }
 }
