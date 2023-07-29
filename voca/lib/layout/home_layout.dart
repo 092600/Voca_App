@@ -37,9 +37,6 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   @override
   Widget build(BuildContext context) {
-// final localDatabaseProvid ber = Provider.of<LocalDatabaseProvider>(context);
-//     final wordsProvider = Provider.of<WordsProvider>(context);
-
     return DefaultTabController(
       length: 5,
       child: Scaffold(

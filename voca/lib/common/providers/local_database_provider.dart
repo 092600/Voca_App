@@ -13,20 +13,23 @@ class LocalDatabaseProvider extends ChangeNotifier {
     _localDatabase = db;
   }
 
-  // 필요한 경우 상태를 업데이트하는 메서드를 추가할 수 있습니다.
-  // 예를 들어, 데이터베이스에 새로운 단어를 추가하는 메서드:
-  // void createNewWord(Word word) {
-  //   localDatabase.createWords(word);
-
-  //   // 상태가 변경되었음을 알리기 위해 notifyListeners()를 호출합니다.
-  //   notifyListeners();
-  // }
-
   saveWords({required List<Word> words}) {
     for (Word word in words) {
       localDatabase.saveWords(word.toWordCompanion());
       localDatabase.saveWordMeaning(word.meanings, word);
     }
+  }
+
+  Future<void> removeTheme({
+    required LanguageType language,
+    required String theme,
+  }) async {
+    await localDatabase.deleteWordTheme(theme: theme);
+  }
+
+  Future<Map<LanguageType, Map<String, List<Word>>>> getMapOfWords(
+      List<LanguageType> languagies) async {
+    return await localDatabase.getMapOfWords(languagies);
   }
 
   Future<Set<String>> findWordsThemes() async {

@@ -2,6 +2,7 @@ package com.example.cert_q_server.domain.word;
 
 import com.example.cert_q_server.domain.word.dto.WordDto;
 import com.example.cert_q_server.domain.word.dto.WordDtoWithoutTheme;
+import com.example.cert_q_server.domain.word.type.LanguageType;
 import com.example.cert_q_server.utils.WordUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,7 @@ public class WordService {
         return wordRepository.getWordDtosByLanguageType(languageType);
     }
 
-    public Map<String, List<WordDtoWithoutTheme>> getWordDtosByLanguageTypeGroupByTheme(String languageType) {
+    public Map<String, List<WordDtoWithoutTheme>> getWordDtosByLanguageTypeGroupByTheme(LanguageType languageType) {
         List<Word> words = wordRepository.getWordByLanguageType(languageType);
         return WordUtils.convertToThemeMap(words);
     }

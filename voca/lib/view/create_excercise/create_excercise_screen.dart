@@ -1,10 +1,11 @@
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:voca/common/component/custom_app_bar.dart';
-import 'package:voca/common/data/model/word/type/language_type.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:voca/common/data/model/word/type/language_type.dart';
+import 'package:voca/common/providers/security_storage_provider.dart';
 
 import '../../common/const/app_colors.dart';
 import '../../common/data/model/word/word.dart';
@@ -20,6 +21,40 @@ class CreateExcerciseScreen extends StatefulWidget {
 }
 
 class _CreateExcerciseScreenState extends State<CreateExcerciseScreen> {
+  List<LanguageType> languagies = [];
+  Map<LanguageType, Map<String, List<Word>>> words = {};
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      final storageProvider =
+          Provider.of<SecurityStorageProvider>(context, listen: false);
+      final localDatabaseProvider =
+          Provider.of<LocalDatabaseProvider>(context, listen: false);
+
+      languagies = await storageProvider.getLanguagies();
+
+      for (var lang in languagies) {
+        Set<String> themes = await localDatabaseProvider
+            .findWordThemesByLanguageType(type: lang);
+
+        Map<String, List<Word>> tmpWords =
+            await WordRepository.getWordsByLanguageTypeGroupByTheme(lang);
+
+        for (String theme in themes) {
+          tmpWords.remove(theme);
+        }
+
+        words[lang] = tmpWords;
+      }
+
+      setState(() {});
+    });
+
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final localDatabaseProvider = Provider.of<LocalDatabaseProvider>(context);
@@ -35,95 +70,56 @@ class _CreateExcerciseScreenState extends State<CreateExcerciseScreen> {
             title: "Download",
           ),
           SliverToBoxAdapter(
-            child: FutureBuilder(
-              future: localDatabaseProvider.findWordsThemes(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  Set<String> installedWordThemes = snapshot.data!;
-
-                  return Column(
-                    children: [
-                      ...LanguageType.values
-                          .map(
-                            (lang) => FutureBuilder<Map<String, List<Word>>>(
-                              future: WordRepository
-                                  .getWordsByLanguageTypeGroupByTheme(lang),
-                              builder: (context,
-                                  AsyncSnapshot<Map<String, List<Word>>>
-                                      snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Container();
-                                }
-
-                                if (snapshot.hasData) {
-                                  Map<String, List<Word>> result =
-                                      snapshot.data!;
-
-                                  Map<String, List<Word>> uninstalledWords = {};
-
-                                  for (var theme in result.keys) {
-                                    // print("${lang.name}/$theme");
-                                    if (!installedWordThemes
-                                        .contains("${lang.name}/$theme")) {
-                                      uninstalledWords[theme] = result[theme]!;
-                                    }
-                                  }
-
-                                  return StudyDownloadBox(
-                                    theme: lang.name,
-                                    widgets: uninstalledWords.keys
-                                        .map(
-                                          (theme) => ExamBankCard(
-                                            theme: theme,
-                                            questions: result[theme]! ?? [],
-                                            onTap: () {
-                                              setState(() {
-                                                localDatabaseProvider.saveWords(
-                                                    words: result[theme]!);
-
-                                                showTopSnackBar(
-                                                  Overlay.of(context),
-                                                  CustomSnackBar.success(
-                                                    message:
-                                                        "단어가 단어장에 추가되었습니다.",
-                                                    backgroundColor:
-                                                        appBarBackgroundColor!,
-                                                  ),
-                                                );
-                                              });
-                                            },
-                                          ),
-                                        )
-                                        .toList(),
+            child: Column(
+              children: [
+                ...languagies.map((language) {
+                  return StudyDownloadBox(
+                    theme: language.name,
+                    widgets: words[language]!.keys.isNotEmpty
+                        ? words[language]!.keys.map((theme) {
+                            return ExamBankCard(
+                              theme: theme,
+                              questions: words[language]![theme]! ?? [],
+                              onTap: () {
+                                setState(() {
+                                  localDatabaseProvider.saveWords(
+                                    words: words[language]![theme]!,
                                   );
 
-                                  // return StudyDownloadBox(
-                                  //   theme: lang.name,
-                                  //   widgets: result.keys
-                                  //       .map(
-                                  //         (theme) => ExamBankCard(
-                                  //           theme: theme,
-                                  //           questions: result[theme]!,
-                                  //         ),
-                                  //       )
-                                  //       .toList(),
-                                  // );
-                                }
+                                  words[language]!.remove(theme);
 
-                                return const Text("다시 한번 시도해주세요");
+                                  showTopSnackBar(
+                                    Overlay.of(context),
+                                    CustomSnackBar.success(
+                                      message: "단어가 단어장에 추가되었습니다.",
+                                      backgroundColor: appBarBackgroundColor!,
+                                    ),
+                                  );
+                                });
                               },
-                            ),
-                          )
-                          .toList(),
-                    ],
+                            );
+                          }).toList()
+                        : [
+                            Container(
+                              height: 50,
+                              color: Colors.white,
+                              child: Center(
+                                child: Text(
+                                  "다운로드할 단어장이 존재하지 않습니다.",
+                                  style: GoogleFonts.bebasNeue(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                   );
-                }
-
-                return Container();
-              },
+                }).toList(),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

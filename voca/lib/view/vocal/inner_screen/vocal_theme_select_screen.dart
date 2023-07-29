@@ -1,24 +1,28 @@
-import 'package:voca/common/component/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:voca/common/const/app_colors.dart';
+import 'package:voca/view/vocal/component/theme_select_card.dart';
 
-import '../../../common/const/app_colors.dart';
+import '../../../common/component/custom_app_bar.dart';
 import '../../../common/data/model/word/type/language_type.dart';
+import '../../../common/data/model/word/word.dart';
 import '../../../common/providers/local_database_provider.dart';
-import '../component/vocal_select_card.dart';
 
-class VocalThemeSelectScreen extends StatelessWidget {
-  final String theme;
-  final LanguageType languageType;
+class VocalThemeSelectScreen extends StatefulWidget {
+  final LanguageType language;
+  final Map<String, List<Word>> themeOfWords;
 
-  VocalThemeSelectScreen({
-    required this.theme,
-    required this.languageType,
+  const VocalThemeSelectScreen({
+    required this.language,
+    required this.themeOfWords,
     super.key,
   });
 
-  final numbers = List.generate(5, (index) => index + 1);
+  @override
+  State<VocalThemeSelectScreen> createState() => _VocalThemeSelectScreenState();
+}
 
+class _VocalThemeSelectScreenState extends State<VocalThemeSelectScreen> {
   @override
   Widget build(BuildContext context) {
     final localDatabaseProvider = Provider.of<LocalDatabaseProvider>(context);
@@ -29,32 +33,30 @@ class VocalThemeSelectScreen extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         slivers: [
           CustomAppBar(
-            title: theme,
+            title: getFullName(widget.language.name),
           ),
           SliverToBoxAdapter(
-            child: FutureBuilder<Set<String>>(
-              future: localDatabaseProvider.findWordThemesByLanguageType(
-                type: languageType,
-              ),
-              builder:
-                  (BuildContext context, AsyncSnapshot<Set<String>> snapshot) {
-                if (snapshot.hasData) {
-                  final Set<String> themes = snapshot.data!;
+            child: Column(
+              children: widget.themeOfWords.keys
+                  .map(
+                    (theme) => ThemeSelectCard(
+                      theme: theme,
+                      language: widget.language,
+                      words: widget.themeOfWords[theme]!,
+                      onDelete: (direction) async {
+                        if (direction == DismissDirection.endToStart) {
+                          await localDatabaseProvider.removeTheme(
+                            theme: theme,
+                            language: widget.language,
+                          );
+                          widget.themeOfWords.remove(theme);
 
-                  return Column(
-                    children: themes
-                        .map(
-                          (theme) => VocalSelectCard(
-                            isTheme: true,
-                            title: theme,
-                            languageType: languageType,
-                          ),
-                        )
-                        .toList(),
-                  );
-                }
-                return Container(); // Add a return statement here if needed
-              },
+                          setState(() {});
+                        }
+                      },
+                    ),
+                  )
+                  .toList(),
             ),
           ),
         ],

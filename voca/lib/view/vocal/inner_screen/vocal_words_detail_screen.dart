@@ -8,14 +8,19 @@ import '../../../common/const/app_colors.dart';
 import '../../../common/providers/local_database_provider.dart';
 
 class VocalWordsDetailsScreen extends StatefulWidget {
+  final String title;
   List<Word> incorrectWords;
   final bool inDownloadPage;
 
   VocalWordsDetailsScreen({
+    required this.title,
     required this.incorrectWords,
     required this.inDownloadPage,
+    this.bigFontSize = false,
     super.key,
   });
+
+  final bigFontSize;
 
   @override
   State<VocalWordsDetailsScreen> createState() =>
@@ -27,16 +32,15 @@ class _VocalWordsDetailsScreenState extends State<VocalWordsDetailsScreen> {
   Widget build(BuildContext context) {
     final localDatabaseProvider = Provider.of<LocalDatabaseProvider>(context);
 
-    // for (var word in widget.incorrectWords) {
-    //   print("${word.spelling} : ${word.isFavorite}");
-    // }
-
     return Scaffold(
       backgroundColor: backgroundColor,
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
-          const CustomAppBar(),
+          CustomAppBar(
+            title: widget.title,
+            bigFontSize: widget.bigFontSize,
+          ),
           SliverList(
             delegate: SliverChildListDelegate(
               widget.incorrectWords

@@ -7,7 +7,6 @@ import '../../common/component/my_circular_progress_indicator.dart';
 import '../../common/const/app_colors.dart';
 import '../../common/data/model/goal/goal.dart';
 import '../../common/providers/security_storage_provider.dart';
-import 'component/custom_study_task_widget.dart';
 import 'component/my_study_history_widget.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -60,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: "Home",
           ),
           const MyStudyHistoryWidget(),
-          const CustomStudyTaskWidget(),
+          // const CustomStudyTaskWidget(),
           // const CustomExamExcercisesWidget(excerciseTitle: "오늘 틀린 문제"),
           // const CustomExamExcercisesWidget(excerciseTitle: "문제 즐겨찾기"),
         ],

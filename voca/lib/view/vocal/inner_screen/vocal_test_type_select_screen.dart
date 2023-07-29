@@ -12,12 +12,12 @@ import '../../../common/data/model/word/word.dart';
 class VocalTestTypeSelectScreen extends StatelessWidget {
   final String theme;
   final LanguageType languageType;
-  final List<Word> questions;
+  final List<Word> words;
 
   const VocalTestTypeSelectScreen({
     required this.theme,
     required this.languageType,
-    required this.questions,
+    required this.words,
     super.key,
   });
 
@@ -26,7 +26,7 @@ class VocalTestTypeSelectScreen extends StatelessWidget {
     final List<Widget> pages = [
       MultipleChoiceChallengeScreen(
         languageType: languageType,
-        questions: questions,
+        words: words,
       ),
       const SpellingChallengeScreen(),
       const SpellingChallengeScreen(),

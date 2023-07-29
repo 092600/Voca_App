@@ -10,14 +10,14 @@ import '../model/word/word.dart';
 import '../model/word/word_meaning.dart';
 
 class WordRepository {
-  static const FlutterSecureStorage storage = FlutterSecureStorage();
+  static const _storage = FlutterSecureStorage();
+  // static const FlutterSecureStorage storage = FlutterSecureStorage();
 
   static Future<Map<String, List<Word>>> getWordsByLanguageTypeGroupByTheme(
       LanguageType type) async {
     Dio dio = Dio();
 
-    const FlutterSecureStorage storage = FlutterSecureStorage();
-    final accessToken = await storage.read(key: ACCESS_TOKEN);
+    final accessToken = await _storage.read(key: ACCESS_TOKEN);
 
     final response = await dio.get(
       '$SERVER_IP/api/v1/voca/theme',

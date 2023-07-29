@@ -73,7 +73,7 @@ class EmailTextField extends StatelessWidget {
             Icons.verified_rounded,
             size: 20,
           ),
-          text: "6 ~ 12자 영문, 숫자로 입력해주세요.",
+          text: "사용할 이메일을 입력해주세요.",
           isLongText: false,
         ),
       ],

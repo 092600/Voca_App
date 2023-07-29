@@ -54,5 +54,18 @@
 	<string>Need to upload image</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Need to upload image</string>
+
+	<!-- <key>NSPhotoLibraryAddUsageDescription</key>
+	<string>*your app name* would like to save photos from the app to your gallery</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>*your app name* would like to access your photo gallery for uploading images to the app</string> -->
+
+	<key>NSFileProviderUserPermissions</key>
+	<dict>
+		<key>NSFileProviderUserConsent</key>
+		<string>YES</string>
+	</dict>
+
+
 </dict>
 </plist>

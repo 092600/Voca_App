@@ -18,10 +18,15 @@ class SecurityStorageProvider extends ChangeNotifier {
 
   FlutterSecureStorage get storage => _storage;
 
-  static final now = DateTime.now();
-  static final String today = "${now.year}/${now.month}/${now.day}";
+  String getTodayDateString() {
+    final now = DateTime.now();
+
+    return "${now.year}/${now.month}/${now.day}";
+  }
 
   Future<void> addTestCorrectWordCnt() async {
+    String today = getTodayDateString();
+
     String correctCnt = await storage.read(key: today) ?? "0";
     String? goal = await storage.read(key: USER_GOAL);
 
@@ -29,6 +34,9 @@ class SecurityStorageProvider extends ChangeNotifier {
   }
 
   Future<Goal> getTodaysGoal() async {
+    final now = DateTime.now();
+    String today = getTodayDateString();
+
     final currentCnt = await storage.read(key: today);
     final userSetGoal = await storage.read(key: USER_GOAL);
 
@@ -61,10 +69,10 @@ class SecurityStorageProvider extends ChangeNotifier {
   }
 
   Future<List<Goal>> getPastDates() async {
+    final now = DateTime.now();
     List<Goal> goals = [];
 
     // 현재 날짜를 가져옵니다.
-
     // 현재 날짜부터 -6일까지의 날짜를 리스트에 추가합니다.
     for (int i = 1; i <= 5; i++) {
       DateTime pastDate = now.subtract(Duration(days: i));

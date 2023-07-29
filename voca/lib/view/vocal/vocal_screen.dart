@@ -6,14 +6,40 @@ import 'package:voca/common/providers/security_storage_provider.dart';
 import '../../common/component/custom_app_bar.dart';
 
 import '../../common/const/app_colors.dart';
-import 'component/vocal_select_card.dart';
+import '../../common/data/model/word/word.dart';
+import '../../common/providers/local_database_provider.dart';
+import 'component/language_select_card.dart';
+import 'inner_screen/vocal_theme_select_screen.dart';
 
-class VocalScreen extends StatelessWidget {
+class VocalScreen extends StatefulWidget {
   const VocalScreen({super.key});
 
   @override
+  State<VocalScreen> createState() => _VocalScreenState();
+}
+
+class _VocalScreenState extends State<VocalScreen> {
+  Map<LanguageType, Map<String, List<Word>>> vocaMap = {};
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      final storageProvider =
+          Provider.of<SecurityStorageProvider>(context, listen: false);
+      final localDatabaseProvider =
+          Provider.of<LocalDatabaseProvider>(context, listen: false);
+
+      List<LanguageType> languagies = await storageProvider.getLanguagies();
+
+      vocaMap = await localDatabaseProvider.getMapOfWords(languagies);
+      setState(() {});
+    });
+
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final storageProvider = Provider.of<SecurityStorageProvider>(context);
     return Scaffold(
       backgroundColor: backgroundColor,
       body: CustomScrollView(
@@ -22,51 +48,34 @@ class VocalScreen extends StatelessWidget {
           const CustomAppBar(
             title: "VOCABULARY",
           ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                FutureBuilder<List<LanguageType>>(
-                  future: storageProvider.getLanguagies(),
-                  builder:
-                      (context, AsyncSnapshot<List<LanguageType>> snapshot) {
-                    if (snapshot.hasData) {
-                      List<LanguageType> languagies = snapshot.data!;
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                ...vocaMap.keys
+                    .map(
+                      (language) => LanguageSelectCard(
+                        language: language,
+                        words: vocaMap[language]!,
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => VocalThemeSelectScreen(
+                                language: language,
+                                themeOfWords: vocaMap[language]!,
+                              ),
+                            ),
+                          );
 
-                      return Column(
-                        children: languagies
-                            .map((language) => VocalSelectCard(
-                                  title: getFullName(language.name),
-                                  isTheme: false,
-                                  languageType: language,
-                                ))
-                            .toList(),
-                      );
-                    }
-
-                    return const Center(
-                      child: Text("공부하실 언어를 선택해주세요."),
-                    );
-                  },
-                ),
+                          // 다음 페이지에서 전달받은 데이터를 처리
+                          setState(() {});
+                        },
+                      ),
+                    )
+                    .toList()
               ],
             ),
           ),
-          // SliverList(
-          //   delegate: SliverChildListDelegate(
-          //     LanguageType.values.map(
-          //       (type) {
-          //         return VocalSelectCard(
-          //           title: getFullName(type
-          //               .name), // VocalSelectCard가 LanguageName을 보여주도록 title > LanguageType.name
-
-          //           isTheme:
-          //               false, // Words의 Theme이 아니라 LanguageType이 들어가므로 false
-          //           languageType: type,
-          //         );
-          //       },
-          //     ).toList(),
-          //   ),
-          // ),
         ],
       ),
     );

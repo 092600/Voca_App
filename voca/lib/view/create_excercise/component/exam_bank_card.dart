@@ -35,8 +35,10 @@ class ExamBankCard extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => VocalWordsDetailsScreen(
+                    title: theme,
                     incorrectWords: questions,
                     inDownloadPage: false,
+                    bigFontSize: false,
                   ),
                 ),
               );
@@ -64,13 +66,13 @@ class ExamBankCard extends StatelessWidget {
                         Row(
                           children: [
                             const Text(
-                              "문제 ",
+                              "단어 : ",
                               style: TextStyle(
                                 fontSize: 13,
                               ),
                             ),
                             Text(
-                              "${questions.length}",
+                              "${questions.length} 개",
                               style: TextStyle(
                                 fontSize: 14,
                                 color: primaryColor,

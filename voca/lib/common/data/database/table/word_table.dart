@@ -5,7 +5,7 @@ import '../drift_database.dart';
 
 class WordTable extends Table {
   // PK, AUTO_INCREMENT
-  IntColumn get id => integer().autoIncrement()();
+  IntColumn get id => integer()();
 
   // ENG. JP, ...
   TextColumn get languageType => text()();

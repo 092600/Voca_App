@@ -32,6 +32,37 @@ class LocalDatabase extends _$LocalDatabase {
     }
   }
 
+  Future<Map<LanguageType, Map<String, List<Word>>>> getMapOfWords(
+      List<LanguageType> languagies) async {
+    Map<LanguageType, Map<String, List<Word>>> result = {};
+
+    for (LanguageType language in languagies) {
+      final List<WordTableData> wordTableDataList = await (select(wordTable)
+            ..where((tbl) => tbl.languageType.equals(language.toString())))
+          .get();
+
+      Map<String, List<Word>> wordsByTheme = {};
+
+      for (WordTableData wordData in wordTableDataList) {
+        List<WordMeaning> meanings = await findWordMeaningByWordId(wordData.id);
+
+        final String theme = wordData.theme;
+        Word word = await convertByWord(wordData, meanings);
+
+        // 이미 해당 theme에 대한 리스트가 생성되었는지 확인 후 추가 혹은 새로운 리스트 생성
+        if (wordsByTheme.containsKey(theme)) {
+          wordsByTheme[theme]!.add(word);
+        } else {
+          wordsByTheme[theme] = [word];
+        }
+      }
+
+      result[language] = wordsByTheme;
+    }
+
+    return result;
+  }
+
   Future<Set<String>> findWordsThemes() async {
     final words = await select(wordTable).get();
 
@@ -86,6 +117,10 @@ class LocalDatabase extends _$LocalDatabase {
         .get();
 
     return convertByWordMeaning(meanings);
+  }
+
+  Future<void> deleteWordTheme({required String theme}) async {
+    await (delete(wordTable)..where((tbl) => tbl.theme.equals(theme))).go();
   }
 
   // Future<void> addFavorite(Word word, bool updateBoolean) async {

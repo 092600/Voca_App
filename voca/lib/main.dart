@@ -14,9 +14,6 @@ import 'layout/home_layout.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // // WordsProvider 인스턴스 생성
-  // WordsProvider wordsProvider = WordsProvider();
-
   const storage = FlutterSecureStorage();
   final db = LocalDatabase();
 

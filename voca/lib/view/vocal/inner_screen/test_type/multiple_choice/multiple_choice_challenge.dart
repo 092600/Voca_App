@@ -16,11 +16,11 @@ import 'component/test_choice_container.dart';
 
 class MultipleChoiceChallengeScreen extends StatefulWidget {
   final LanguageType languageType;
-  final List<Word> questions;
+  final List<Word> words;
 
   const MultipleChoiceChallengeScreen({
     required this.languageType,
-    required this.questions,
+    required this.words,
     super.key,
   });
 
@@ -44,7 +44,7 @@ class _MultipleChoiceChallengeScreenState
   @override
   Widget build(BuildContext context) {
     final storageProvider = Provider.of<SecurityStorageProvider>(context);
-    final List<Word> questions = widget.questions;
+    final List<Word> questions = widget.words;
 
     // 처음에 들어온 경우, words -> shuffle
     if (!isLoaded) {
@@ -139,6 +139,7 @@ class _MultipleChoiceChallengeScreenState
                       context,
                       MaterialPageRoute(
                         builder: (context) => VocalWordsDetailsScreen(
+                          title: "틀린 문제 다시 보기",
                           incorrectWords: incorrectWords,
                           inDownloadPage: false,
                         ),

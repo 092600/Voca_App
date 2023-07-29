@@ -4,6 +4,7 @@ import com.example.cert_q_server.domain.word.Word;
 import com.example.cert_q_server.domain.word.WordService;
 import com.example.cert_q_server.domain.word.dto.WordDto;
 import com.example.cert_q_server.domain.word.dto.WordDtoWithoutTheme;
+import com.example.cert_q_server.domain.word.type.LanguageType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +31,9 @@ public class ApiV1Controller {
 
     @GetMapping("/theme")
     public Map<String, List<WordDtoWithoutTheme>> getWordsGroupByTheme(
-            @RequestParam("type") String type
+            @RequestParam("type") LanguageType type
     ) {
+        System.out.println(type);
         return wordService.getWordDtosByLanguageTypeGroupByTheme(type);
     }
 

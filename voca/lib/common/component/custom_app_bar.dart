@@ -4,12 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../view/account/login/login_screen.dart';
 import '../const/app_colors.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatefulWidget {
   const CustomAppBar({
     super.key,
     this.expandedHeight,
     this.appBarBody,
     this.useSettingsIcon = false,
+    this.bigFontSize = true,
     String? title,
   }) : title = title ?? "Exam Excercise";
 
@@ -18,17 +19,23 @@ class CustomAppBar extends StatelessWidget {
 
   final String title;
   final bool useSettingsIcon;
+  final bool bigFontSize;
 
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      expandedHeight: expandedHeight,
+      expandedHeight: widget.expandedHeight,
       pinned: true,
       actions: [
         const SizedBox(
           width: 10,
         ),
-        useSettingsIcon == false
+        widget.useSettingsIcon == false
             ? InkWell(
                 onTap: () {
                   showModalBottomSheet(
@@ -87,13 +94,13 @@ class CustomAppBar extends StatelessWidget {
       centerTitle: false,
       backgroundColor: primaryColor,
       title: Text(
-        title,
+        widget.title,
         style: GoogleFonts.bebasNeue(
-          fontSize: 25,
+          fontSize: widget.bigFontSize ? 25 : 18,
           fontWeight: FontWeight.w600,
         ),
       ),
-      flexibleSpace: appBarBody,
+      flexibleSpace: widget.appBarBody,
     );
   }
 }
