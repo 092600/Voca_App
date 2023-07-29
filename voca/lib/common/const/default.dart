@@ -14,6 +14,7 @@ const String STORAGE_USER_EMAIL = "USEREMAIL";
 const String STORAGE_USER_LANGUAGIES = "USER_STUDY_LANGUAGIES";
 const String STORAGE_USER_FIRST_NAME = "FIRST_NAME";
 const String STORAGE_USER_LAST_NAME = "LAST_NAME";
+const String STORAGE_USER_PROFILE_PATH = "PROFILE_PATH";
 
 const List<String> IMPORT_CSV_SUMMARY = [
   "엑셀 또는 Numbers 파일을 열고 사용할 단어와 의미를 작성합니다.",

@@ -15,7 +15,6 @@ public class ImageUtil {
     private String RootProfilePath = "/Users/sim/Documents/GitHub/Voca_App/image/profile";
 
     public void saveUserProfileImage(User user, MultipartFile image) throws IOException {
-//        try {
         String userDirPath = RootProfilePath + "/" + user.getId();
 
         File userDirectory = new File(userDirPath);
@@ -27,8 +26,5 @@ public class ImageUtil {
 
         File profile = new File(imagePath);
         image.transferTo(profile);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 }

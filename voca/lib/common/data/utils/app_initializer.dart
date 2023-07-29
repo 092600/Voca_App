@@ -29,5 +29,9 @@ class AppInitializer {
     await storage.write(key: STORAGE_USER_LAST_NAME, value: account.lastName);
     await storage.write(key: STORAGE_USER_EMAIL, value: account.email);
     await storage.write(key: STORAGE_USER_LANGUAGIES, value: languagiesToJson);
+    await storage.write(
+      key: STORAGE_USER_PROFILE_PATH,
+      value: account.profilePath,
+    );
   }
 }

@@ -68,6 +68,7 @@ public class JwtService {
         claims.put("lastName", user.getLastname());
         claims.put("status", user.getStatus().name());
         claims.put("languagies", new Gson().toJson(user.getLanguagies()));
+        claims.put("profilePath", "http://localhost:8080/api/v1/auth/user/"+user.getId()+"/profile");
 
         System.out.println("claims = " + claims);
 

@@ -13,6 +13,7 @@ class Account {
   final AccountStatus status;
   final String password;
   List<LanguageType> languagies;
+  String profilePath;
 
   Account({
     required this.email,
@@ -21,7 +22,9 @@ class Account {
     required this.status,
     required this.password,
     List<LanguageType>? languagies,
-  }) : languagies = languagies ?? [];
+    String? profilePath,
+  })  : languagies = languagies ?? [],
+        profilePath = profilePath ?? "";
 
   static Account getStatusNoneAccount() {
     return Account(

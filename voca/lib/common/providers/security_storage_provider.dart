@@ -148,6 +148,10 @@ class SecurityStorageProvider extends ChangeNotifier {
     return await storage.read(key: STORAGE_USER_EMAIL);
   }
 
+  Future<String?> getUserProfilePath() async {
+    return await storage.read(key: STORAGE_USER_PROFILE_PATH);
+  }
+
   Future<List<LanguageType>> getLanguagies() async {
     String? languagiesToJson = await storage.read(key: STORAGE_USER_LANGUAGIES);
 
@@ -167,6 +171,7 @@ class SecurityStorageProvider extends ChangeNotifier {
     String? firstName = await getUserFirstName();
     String? lastName = await getUserLastName();
     List<LanguageType> languagies = await getLanguagies();
+    String? profilePath = await getUserProfilePath();
 
     return Account(
       email: email!,
@@ -175,6 +180,7 @@ class SecurityStorageProvider extends ChangeNotifier {
       password: "",
       status: AccountStatus.ACTIVE,
       languagies: languagies,
+      profilePath: profilePath,
     );
   }
 }

@@ -61,7 +61,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Container(
               margin: const EdgeInsets.only(
                 top: 40,
-                // top: 20,
                 bottom: 15,
                 left: 10,
                 right: 10,
@@ -235,12 +234,14 @@ class UserProfileRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        SizedBox(
           width: 80,
           height: 80,
-          decoration: const BoxDecoration(
-            color: Colors.blue,
-            shape: BoxShape.circle,
+          child: CircleAvatar(
+            backgroundColor: backgroundColor,
+            backgroundImage: NetworkImage(
+              account.profilePath,
+            ),
           ),
         ),
         Container(

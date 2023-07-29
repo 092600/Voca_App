@@ -42,6 +42,9 @@ class AuthRepository {
 
         String firstName = claims["firstName"];
         String lastName = claims["lastName"];
+        String profilePath = claims["profilePath"];
+
+        print("profilePath : $profilePath");
 
         Account account = Account(
           email: email,
@@ -51,7 +54,10 @@ class AuthRepository {
             statusStr: status,
           ),
           password: "",
+          profilePath: profilePath,
         );
+
+        print("account.profilePath : ${account.profilePath}");
 
         if (account.status == AccountStatus.ACTIVE) {
           await appInitializer.appSetUp(

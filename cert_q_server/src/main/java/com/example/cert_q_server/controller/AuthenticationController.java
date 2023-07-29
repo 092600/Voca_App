@@ -11,14 +11,18 @@ import com.example.cert_q_server.domain.word.type.LanguageType;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +32,18 @@ import java.util.stream.Collectors;
 public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
+
+
+    @GetMapping(value = "/user/{id}/profile")
+    public ResponseEntity<Resource> getUserProfileImage(@PathVariable("id") Long id) throws MalformedURLException {
+
+        Resource imageResource = (Resource) new UrlResource("file:/Users/sim/Documents/GitHub/Voca_App/image/profile/"+id+"/profile.jpg");
+        String contentType = "image/jpg";
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .body(imageResource);
+    }
 
     @GetMapping("/email/duplicate")
     public ResponseEntity<Boolean> duplicateEmail(
