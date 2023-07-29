@@ -1,18 +1,12 @@
 package com.example.cert_q_server.domain.user;
 
 import com.example.cert_q_server.config.auth.token.Token;
-import com.example.cert_q_server.domain.common.BaseTimeEntity;
 import com.example.cert_q_server.domain.common.UserTimeEntity;
 import com.example.cert_q_server.domain.user.role.Role;
 import com.example.cert_q_server.domain.word.type.LanguageType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 @Getter

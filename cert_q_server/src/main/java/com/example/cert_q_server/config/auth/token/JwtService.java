@@ -1,7 +1,6 @@
 package com.example.cert_q_server.config.auth.token;
 
 
-import java.io.IOException;
 import java.util.*;
 import java.util.function.Function;
 
@@ -9,7 +8,6 @@ import java.security.Key;
 
 import com.example.cert_q_server.domain.user.User;
 import com.example.cert_q_server.domain.user.user_details.CustomUserDetails;
-import com.example.cert_q_server.domain.word.type.LanguageType;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 

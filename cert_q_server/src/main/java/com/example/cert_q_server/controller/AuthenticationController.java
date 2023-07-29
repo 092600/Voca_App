@@ -10,6 +10,7 @@ import com.example.cert_q_server.config.auth.RegisterRequest;
 import com.example.cert_q_server.domain.word.type.LanguageType;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +32,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
+    @Value("${application.auth.user-profile-path}")
+    private String rootProfilePath;
+
     private final AuthenticationService authenticationService;
 
 
     @GetMapping(value = "/user/{id}/profile")
     public ResponseEntity<Resource> getUserProfileImage(@PathVariable("id") Long id) throws MalformedURLException {
 
-        Resource imageResource = (Resource) new UrlResource("file:/Users/sim/Documents/GitHub/Voca_App/image/profile/"+id+"/profile.jpg");
+        Resource imageResource = (Resource) new UrlResource("file:"+rootProfilePath+"/"+id+"/profile.jpg");
         String contentType = "image/jpg";
 
         return ResponseEntity.ok()
